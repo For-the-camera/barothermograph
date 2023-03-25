@@ -37,14 +37,17 @@ export default {
   methods: {
     selectOption: function (index) {
       if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref${this.selectedOption}`][0].style.color = "black";
+        this.$refs[`ref-issue-1-${this.selectedOption}`][0].style.color =
+          "black";
         this.selectedOption = null;
+        this.store.answer["issue-1"] = "";
       } else {
         if (this.selectedOption) {
-          this.$refs[`ref${this.selectedOption}`][0].style.color = "black";
+          this.$refs[`ref-issue-1-${this.selectedOption}`][0].style.color =
+            "black";
         }
         this.selectedOption = index;
-        this.$refs[`ref${index}`][0].style.color = "red";
+        this.$refs[`ref-issue-1-${index}`][0].style.color = "red";
         this.store.answer["issue-1"] = index;
       }
     },
@@ -66,14 +69,14 @@ export default {
           @click="selectOption(option.name)"
         >
           <img :src="baseSrc + option.image" alt="" />
-          <p :ref="'ref' + option.name">
+          <p :ref="'ref-issue-1-' + option.name">
             {{ option.name }}
           </p>
         </div>
       </div>
     </div>
     <div class="right">
-      <img src="../assets/images/2-2.jpg" alt="">
+      <img src="../assets/images/2-2.jpg" alt="" />
     </div>
   </div>
 </template>
@@ -112,7 +115,7 @@ export default {
     display: flex;
     align-items: center;
     padding-left: 30px;
-    img{
+    img {
       width: 90%;
     }
   }
