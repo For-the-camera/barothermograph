@@ -44,8 +44,9 @@ export default {
         if (index === 0) {
           config.state = "process";
           return config;
+        } else {
+          config.state = "wait";
         }
-        config.state = "wait";
         return config;
       });
     },

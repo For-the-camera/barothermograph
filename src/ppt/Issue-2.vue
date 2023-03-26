@@ -82,6 +82,7 @@ export default {
     font-size: 20px;
     color: red;
     margin-bottom: 50px;
+    font-weight: bold;
   }
   ul {
     list-style: upper-alpha;
@@ -89,9 +90,8 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-    }
-    .active {
-      color: red;
+      font-size: 18px;
+      font-weight: 600;
     }
   }
 }
