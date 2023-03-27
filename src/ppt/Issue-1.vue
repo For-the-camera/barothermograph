@@ -2,7 +2,7 @@
 import { usePPTStore } from "../stores/ppt";
 
 export default {
-  name: "Test1",
+  name: "Issue1",
   props: {},
   data() {
     const store = usePPTStore();
