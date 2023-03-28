@@ -1,9 +1,9 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-export default {
-  name: "Issue4",
-  props: {},
 
+export default {
+  name: "Issue7",
+  props: {},
   data() {
     const store = usePPTStore();
     return {
@@ -13,12 +13,12 @@ export default {
   },
   methods: {
     deleteRowData(index) {
-      this.store.answer.issue4.splice(index, 1);
-      this.store.answer.issue4.forEach((item, i) => {
+      this.store.answer.issue7.splice(index, 1);
+      this.store.answer.issue7.forEach((item, i) => {
         this.$set(this.tableData, i, item);
       });
-      this.tableData.forEach((item, i) => {
-        if (i + 1 > this.store.answer.issue4.length) {
+      this.tableData.forEach((_item, i) => {
+        if (i + 1 > this.store.answer.issue7.length) {
           this.$set(this.tableData, i, {});
           if (i > 7) {
             this.tableData.splice(i, 1);
@@ -28,17 +28,17 @@ export default {
     },
   },
   mounted() {
-    if (this.store.answer.issue4.length > 0) {
-      this.store.answer.issue4.forEach((item, index) => {
+    if (this.store.answer.issue7.length > 0) {
+      this.store.answer.issue7.forEach((item, index) => {
         this.$set(this.tableData, index, item);
       });
     }
-    this.$watch("store.putData.issue4", function (val) {
+    this.$watch("store.putData.issue7", function (val) {
       if (val) {
-        this.store.answer.issue4.forEach((item, index) => {
+        this.store.answer.issue7.forEach((item, index) => {
           this.$set(this.tableData, index, item);
         });
-        this.store.putData.issue4 = false;
+        this.store.putData.issue7 = false;
       }
     });
   },
@@ -46,14 +46,9 @@ export default {
 </script>
 <template>
   <div class="page-container">
-    <div>
-      <p>左图是一个实验模拟器,</p>
-      <ol>
-        <li>选择不同大小的瓶子</li>
-        <li>选择不同粗细的管子</li>
-        <li>调节温度按钮观察液柱高度变化</li>
-        <li>点击记录按钮，可将数据记录在以下表格中</li>
-      </ol>
+    <div class="question-stem">
+      <p>为了验证你的{{ store.answer.issue6.guess }}</p>
+      <p>请通过实验模拟器收集数据验证你的猜想，并将数据记录在以下表格</p>
     </div>
     <div class="data-table">
       <el-table border style="width: 100%" :data="tableData" :max-height="290">
@@ -79,21 +74,12 @@ export default {
 <style scoped lang="scss">
 .page-container {
   padding: 10px;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  ol {
-    list-style-position: inside;
-    li {
-      padding: 10px 0;
+  .question-stem {
+    margin-bottom: 30px;
+    p {
       font-weight: bold;
+      margin: 20px 0;
     }
-  }
-  p {
-    font-size: 20px;
-    font-weight: bold;
   }
   ::v-deep .el-table tr {
     height: 25px;

@@ -1,27 +1,34 @@
 <script>
+import { usePPTStore } from "../stores/ppt";
+
 export default {
   name: "Thermometer",
   props: {},
   data() {
+    const store = usePPTStore();
     return {
+      store,
       baseSrc: "src/assets/images/",
       bottles: [
         {
           imageName: "bottle-100.png",
           size: 100,
           label: "100ml（小）",
+          value: "小",
           checked: false,
         },
         {
           imageName: "bottle-200.png",
           size: 200,
           label: "200ml（中）",
+          value: "中",
           checked: false,
         },
         {
           imageName: "bottle-300.png",
           size: 300,
           label: "300ml（大）",
+          value: "大",
           checked: false,
         },
       ],
@@ -30,6 +37,7 @@ export default {
           imageName: "pipe-3.png",
           size: 3,
           label: "3ml（细）",
+          value: "细",
           checked: false,
           width: 10,
         },
@@ -37,6 +45,7 @@ export default {
           imageName: "pipe-4.png",
           size: 4,
           label: "4ml（中）",
+          value: "中",
           checked: false,
           width: 13,
         },
@@ -44,14 +53,19 @@ export default {
           imageName: "pipe-5.png",
           size: 5,
           label: "5ml（粗）",
+          value: "粗",
           checked: false,
           width: 19,
         },
       ],
       temp: 10,
+      // 当前选中的瓶子和吸管规格
       currentBottle: null,
       currentPipe: null,
       currentPipeWidth: 0,
+      // 当前选中的瓶子、吸管索引
+      currentBottleIndex: null,
+      currentPipeIndex: null,
       coefficientList: {
         "100-3": 0.44,
         "100-4": 0.25,
@@ -63,8 +77,8 @@ export default {
         "300-4": 0.44,
         "300-5": 0.23,
       },
-      // 水柱最大值
-      maxSpoutHeight: 10.0,
+      // 临界值
+      maxSpoutHeight: 0.0021156706755459664,
     };
   },
   computed: {
@@ -94,36 +108,26 @@ export default {
       const sum = a + b + c + d + e;
       const g = 1000 / sum + f;
       const result = C * g; // 结果
-      // 小数位数处理
-      const str = result.toString();
-      const H = (
-        (str.substring(0, str.indexOf(str.split(/0\.0+([1-9]\d*)/)[1]) + 3) *
-          Math.pow(10, 4)) /
-        2.11
-      ).toFixed(1);
-      if (H < 10) {
-        return H;
-      } else {
-        return 10.0;
-      }
+      const H = (result / this.maxSpoutHeight) * 10;
+      return H > 10 ? 10 : H.toFixed(1);
     },
     // 刻度值转换为水柱高度
     spoutHeightToPx: function () {
-      if (this.spoutHeight < this.maxSpoutHeight) {
-        return (this.spoutHeight / this.maxSpoutHeight) * 247;
+      if (this.spoutHeight < 10) {
+        return (this.spoutHeight / 10) * 247;
       } else {
         return 248;
       }
     },
   },
   methods: {
-    checkedBottle: function (size) {
-      console.log(this.currentBottle);
+    checkedBottle: function (size, index) {
       if (this.currentBottle === size && this.currentBottle) {
         this.$refs[
           `ref-bottle-${this.currentBottle}`
         ][0].style.backgroundColor = "#fff";
         this.currentBottle = null;
+        this.currentBottleIndex = null;
       } else {
         if (this.currentBottle) {
           this.$refs[
@@ -131,15 +135,17 @@ export default {
           ][0].style.backgroundColor = "#fff";
         }
         this.currentBottle = size;
+        this.currentBottleIndex = index;
         this.$refs[`ref-bottle-${size}`][0].style.backgroundColor = "#000";
       }
     },
-    checkedPipe: function (size, width) {
+    checkedPipe: function (size, width, index) {
       if (this.currentPipe === size && this.currentPipe) {
         this.$refs[`ref-pipe-${this.currentPipe}`][0].style.backgroundColor =
           "#fff";
         this.currentPipeWidth = 0;
         this.currentPipe = null;
+        this.currentPipeIndex = null;
       } else {
         if (this.currentPipe) {
           this.$refs[`ref-pipe-${this.currentPipe}`][0].style.backgroundColor =
@@ -147,7 +153,24 @@ export default {
         }
         this.currentPipe = size;
         this.currentPipeWidth = width;
+        this.currentPipeIndex = index;
         this.$refs[`ref-pipe-${size}`][0].style.backgroundColor = "#000";
+      }
+    },
+    postRecord: function () {
+      const postSite = this.store.nowPage.actionIndex;
+      if (this.currentBottleIndex !== null && this.currentPipeIndex !== null) {
+        const data = {
+          bottleSize: this.bottles[this.currentBottleIndex].value,
+          pipeSize: this.pipes[this.currentPipeIndex].value,
+          temp: this.temp,
+          spoutHeight: this.spoutHeight,
+        };
+        this.store.answer[postSite].push(data);
+        this.store.putData[`${postSite}`] = true;
+        if (postSite === 'issue7') {
+          this.store.putData['issue8'] = true;
+        }
       }
     },
   },
@@ -158,9 +181,9 @@ export default {
     <div class="material-list">
       <div
         class="material-list-item"
-        v-for="bottle in bottles"
+        v-for="(bottle, index) in bottles"
         :key="bottle.size"
-        @click="checkedBottle(bottle.size)"
+        @click="checkedBottle(bottle.size, index)"
       >
         <div>
           <img :src="baseSrc + bottle.imageName" alt="" />
@@ -170,9 +193,9 @@ export default {
       </div>
       <div
         class="material-list-item"
-        v-for="pipe in pipes"
+        v-for="(pipe, index) in pipes"
         :key="pipe.size"
-        @click="checkedPipe(pipe.size, pipe.width)"
+        @click="checkedPipe(pipe.size, pipe.width, index)"
       >
         <div>
           <img :src="baseSrc + pipe.imageName" alt="" />
@@ -188,7 +211,11 @@ export default {
       <div class="thermometer">
         <div class="image">
           <img
-            :src="`${baseSrc}${currentBottle}-${currentPipe}.png`"
+            :src="
+              currentBottle && currentPipe
+                ? `${baseSrc}${currentBottle}-${currentPipe}.png`
+                : ''
+            "
             v-show="currentBottle && currentPipe"
             alt=""
           />
@@ -222,7 +249,7 @@ export default {
           </div>
         </div>
         <el-slider v-model="temp" :min="10" :max="30"></el-slider>
-        <el-button>记录</el-button>
+        <el-button @click="postRecord">记录</el-button>
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ export default {
         this.$refs[`ref-issue-2-${this.selectedOption}`][0].style.color =
           "black";
         this.selectedOption = null;
-        this.store.answer["issue-2"] = "";
+        this.store.answer.issue2 = "";
       } else {
         if (this.selectedOption) {
           this.$refs[`ref-issue-2-${this.selectedOption}`][0].style.color =
@@ -47,7 +47,7 @@ export default {
         }
         this.selectedOption = index;
         this.$refs[`ref-issue-2-${index}`][0].style.color = "red";
-        this.store.answer["issue-2"] = index;
+        this.store.answer.issue2 = index;
       }
     },
   },
