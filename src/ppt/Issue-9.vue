@@ -1,5 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import img1 from "../assets/images/10-2.jpg"
+import img2 from "../assets/images/10-3.jpg"
 
 export default {
   name: "Test1",
@@ -8,6 +10,8 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      img1,
+      img2,
       options: [
         {
           lable: "曲线A",
@@ -46,11 +50,11 @@ export default {
     <div class="question-stem">
       <div class="images">
         <div class="images-inner">
-          <img src="../assets/images/10-2.jpg" alt="" />
+          <img :src="img1" alt="" />
           <p>甲</p>
         </div>
         <div class="images-inner">
-          <img src="../assets/images/10-2.jpg" alt="" />
+          <img :src="img2" alt="" />
           <p>乙</p>
         </div>
       </div>

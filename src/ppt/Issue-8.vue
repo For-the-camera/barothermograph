@@ -20,10 +20,14 @@ export default {
       "store.putData.issue8",
       function (val) {
         if (val) {
-          console.log(123);
+          const length = this.store.answer.issue7.length;
+
           this.store.answer.issue7.forEach((item, index) => {
             this.$set(this.tableData, index, item);
           });
+          if (length < this.tableData.length) {
+            this.tableData.pop();
+          }
           this.store.putData.issue8 = false;
         }
       },
@@ -56,7 +60,7 @@ export default {
 <style scoped lang="scss">
 .page-container {
   padding: 10px;
-  p{
+  p {
     font-weight: bold;
     margin: 20px 0;
   }

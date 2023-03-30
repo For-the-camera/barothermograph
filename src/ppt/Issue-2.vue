@@ -1,5 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import img1 from "../assets/images/3-1.jpg"
+
 
 export default {
   name: "Issue2",
@@ -8,6 +10,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      img1,
       options: [
         {
           label: "瓶子的热胀冷缩",
@@ -69,7 +72,7 @@ export default {
       </ul>
     </div>
     <div>
-      <img src="../assets/images/3-1.jpg" alt="" />
+      <img :src="img1" alt="" />
     </div>
   </div>
 </template>
@@ -79,10 +82,9 @@ export default {
   justify-content: space-between;
 
   p {
-    font-size: 20px;
-    color: red;
+    font-size: 1.25rem;
     margin-bottom: 50px;
-    font-weight: bold;
+    line-height: 3rem;
   }
   ul {
     list-style: upper-alpha;

@@ -25,6 +25,7 @@ export default {
           }
         }
       });
+      this.store.putData.issue8 = true;
     },
   },
   mounted() {

@@ -1,6 +1,11 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-
+import img1 from "../assets/images/2-1.jpg";
+import img2 from "../assets/images/2-2.jpg";
+import imgA from "../assets/images/2-A.jpg";
+import imgB from "../assets/images/2-B.jpg";
+import imgC from "../assets/images/2-C.jpg";
+import imgD from "../assets/images/2-D.jpg";
 export default {
   name: "Issue1",
   props: {},
@@ -8,25 +13,26 @@ export default {
     const store = usePPTStore();
     return {
       store,
-      baseSrc: "src/assets/images/2-",
+      img1,
+      img2,
       options: [
         {
-          image: "A.jpg",
+          image: imgA,
           name: "A",
           checked: false,
         },
         {
-          image: "B.jpg",
+          image: imgB,
           name: "B",
           checked: false,
         },
         {
-          image: "C.jpg",
+          image: imgC,
           name: "C",
           checked: false,
         },
         {
-          image: "D.jpg",
+          image: imgD,
           name: "D",
           checked: false,
         },
@@ -57,7 +63,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="left">
-      <img src="../assets/images/2-1.jpg" class="known-condition" alt="" />
+      <img :src="img1" class="question-stem" alt="" />
       <p>
         下图是某一天各个时段气温的曲线，右图拍照的时间是8:00，请你判断下午16:00时，该“简易温度计”的刻度应该是以下哪张图
       </p>
@@ -68,7 +74,7 @@ export default {
           :key="option.name"
           @click="selectOption(option.name)"
         >
-          <img :src="baseSrc + option.image" alt="" />
+          <img :src="option.image" alt="" />
           <p :ref="'ref-issue-1-' + option.name">
             {{ option.name }}
           </p>
@@ -76,7 +82,7 @@ export default {
       </div>
     </div>
     <div class="right">
-      <img src="../assets/images/2-2.jpg" alt="" />
+      <img :src="img2" alt="" />
     </div>
   </div>
 </template>
@@ -85,7 +91,11 @@ export default {
   display: flex;
   .left {
     width: 70%;
-    .known-condition {
+    p{
+      line-height: 3rem;
+      font-size: 1.25rem;
+    }
+    .question-stem {
       width: 50%;
       height: auto;
     }
@@ -102,7 +112,7 @@ export default {
         p {
           text-align: center;
           font-size: 24px;
-          font-weight: bold;
+
         }
         .checked {
           color: red;

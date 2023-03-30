@@ -110,6 +110,7 @@ $ppt-bg-left: #e2f0d9;
 $ppt-bg-right: #fff2cc;
 $ppt-border-radius: 30px;
 $single-padding: 30px;
+$ppt-border-basic: .1rem solid #353b48;
 .container {
   height: 100%;
   display: flex;
@@ -122,15 +123,21 @@ $single-padding: 30px;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
+    .left,.right,.single{
+      border: $ppt-border-basic;
+    }
+    
     .left {
       border-radius: $ppt-border-radius;
       background-color: $ppt-bg-left;
       padding: $ppt-padding;
+      margin-right: .5rem;
     }
     .right {
       border-radius: $ppt-border-radius;
       background-color: $ppt-bg-right;
       padding: $ppt-padding;
+      margin-left: .5rem;
     }
     .single {
       background-color: $ppt-bg-right;

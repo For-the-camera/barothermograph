@@ -1,16 +1,19 @@
 <script>
+import img1 from "../assets/images/10-1.png";
 export default {
   name: "Chart",
   props: {},
   data() {
-    return {};
+    return {
+      img1,
+    };
   },
   methods: {},
 };
 </script>
 <template>
   <div class="page-conatiner">
-    <img src="../assets/images/10-1.png" alt="" />
+    <img :src="img1" alt="" />
   </div>
 </template>
 <style scoped lang="scss">

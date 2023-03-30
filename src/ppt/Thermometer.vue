@@ -1,6 +1,20 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-
+import bottle100 from "../assets/images/bottle-100.png";
+import bottle200 from "../assets/images/bottle-200.png";
+import bottle300 from "../assets/images/bottle-300.png";
+import pipe3 from "../assets/images/pipe-3.png";
+import pipe4 from "../assets/images/pipe-4.png";
+import pipe5 from "../assets/images/pipe-5.png";
+import T1 from "../assets/images/100-3.png";
+import T2 from "../assets/images/100-4.png";
+import T3 from "../assets/images/100-5.png";
+import T4 from "../assets/images/200-3.png";
+import T5 from "../assets/images/200-4.png";
+import T6 from "../assets/images/200-5.png";
+import T7 from "../assets/images/300-3.png";
+import T8 from "../assets/images/300-4.png";
+import T9 from "../assets/images/300-5.png";
 export default {
   name: "Thermometer",
   props: {},
@@ -8,24 +22,23 @@ export default {
     const store = usePPTStore();
     return {
       store,
-      baseSrc: "src/assets/images/",
       bottles: [
         {
-          imageName: "bottle-100.png",
+          imageName: bottle100,
           size: 100,
           label: "100ml（小）",
           value: "小",
           checked: false,
         },
         {
-          imageName: "bottle-200.png",
+          imageName: bottle200,
           size: 200,
           label: "200ml（中）",
           value: "中",
           checked: false,
         },
         {
-          imageName: "bottle-300.png",
+          imageName: bottle300,
           size: 300,
           label: "300ml（大）",
           value: "大",
@@ -34,7 +47,7 @@ export default {
       ],
       pipes: [
         {
-          imageName: "pipe-3.png",
+          imageName: pipe3,
           size: 3,
           label: "3ml（细）",
           value: "细",
@@ -42,7 +55,7 @@ export default {
           width: 10,
         },
         {
-          imageName: "pipe-4.png",
+          imageName: pipe4,
           size: 4,
           label: "4ml（中）",
           value: "中",
@@ -50,7 +63,7 @@ export default {
           width: 13,
         },
         {
-          imageName: "pipe-5.png",
+          imageName: pipe5,
           size: 5,
           label: "5ml（粗）",
           value: "粗",
@@ -58,6 +71,17 @@ export default {
           width: 19,
         },
       ],
+      thermometer: {
+        "100-3": T1,
+        "100-4": T2,
+        "100-5": T3,
+        "200-3": T4,
+        "200-4": T5,
+        "200-5": T6,
+        "300-3": T7,
+        "300-4": T8,
+        "300-5": T9,
+      },
       temp: 10,
       // 当前选中的瓶子和吸管规格
       currentBottle: null,
@@ -168,8 +192,8 @@ export default {
         };
         this.store.answer[postSite].push(data);
         this.store.putData[`${postSite}`] = true;
-        if (postSite === 'issue7') {
-          this.store.putData['issue8'] = true;
+        if (postSite === "issue7") {
+          this.store.putData["issue8"] = true;
         }
       }
     },
@@ -186,7 +210,7 @@ export default {
         @click="checkedBottle(bottle.size, index)"
       >
         <div>
-          <img :src="baseSrc + bottle.imageName" alt="" />
+          <img :src="bottle.imageName" alt="" />
         </div>
         <p>{{ bottle.label }}</p>
         <div class="radio" :ref="`ref-bottle-${bottle.size}`"></div>
@@ -198,7 +222,7 @@ export default {
         @click="checkedPipe(pipe.size, pipe.width, index)"
       >
         <div>
-          <img :src="baseSrc + pipe.imageName" alt="" />
+          <img :src="pipe.imageName" alt="" />
         </div>
         <p>{{ pipe.label }}</p>
         <div class="radio" :ref="`ref-pipe-${pipe.size}`"></div>
@@ -213,7 +237,7 @@ export default {
           <img
             :src="
               currentBottle && currentPipe
-                ? `${baseSrc}${currentBottle}-${currentPipe}.png`
+                ? thermometer[`${this.currentBottle}-${this.currentPipe}`]
                 : ''
             "
             v-show="currentBottle && currentPipe"
@@ -249,7 +273,7 @@ export default {
           </div>
         </div>
         <el-slider v-model="temp" :min="10" :max="30"></el-slider>
-        <el-button @click="postRecord">记录</el-button>
+        <el-button @click="postRecord" :disabled="!store.nowPage.actionIndex">记录</el-button>
       </div>
     </div>
   </div>

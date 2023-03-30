@@ -1,6 +1,8 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-
+import img1 from "../assets/images/4-1.jpg";
+import img2 from "../assets/images/4-2.png";
+import img3 from "../assets/images/4-3.jpg";
 export default {
   name: "Issue3",
   props: {},
@@ -8,6 +10,9 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      img1,
+      img2,
+      img3,
       options: [
         {
           label: "更换大一些的瓶子",
@@ -71,9 +76,9 @@ export default {
       </ul>
     </div>
     <div class="images">
-      <img src="../assets/images/4-1.jpg" alt="" />
-      <img src="../assets/images/4-2.png" class="arrow" alt="" />
-      <img src="../assets/images/4-3.jpg" alt="" />
+      <img :src="img1" alt="" />
+      <img :src="img2" class="arrow" alt="" />
+      <img :src="img3" alt="" />
     </div>
   </div>
 </template>

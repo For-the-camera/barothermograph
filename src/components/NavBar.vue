@@ -99,14 +99,21 @@ $wait-color: #bbb7ad;
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
   padding-left: 20px;
   .item {
     display: flex;
     align-items: center;
+    justify-content: space-around;
+    width: 10%;
     .step {
       display: flex;
       align-items: center;
-      padding: 20px 20px 13px 20px;
+      padding: 20px 0px 13px 0px;
+      .step-title {
+        font-size: 16px;
+      }
       .step-index {
         width: 23px;
         height: 23px;
@@ -144,6 +151,13 @@ $wait-color: #bbb7ad;
         align-items: center;
       }
     }
+    .arrow {
+      font-size: 24px;
+      color: #bbb7ad;
+    }
+  }
+  .item:last-child {
+    justify-content: start;
   }
   .is_process {
     border-bottom: 2px solid $indicator-color;
