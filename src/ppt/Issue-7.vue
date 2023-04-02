@@ -48,7 +48,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="question-stem">
-      <p>为了验证你的{{ store.answer.issue6.guess }}</p>
+      <p>你的猜想是：{{ store.answer.issue6.guess }}</p>
       <p>请通过实验模拟器收集数据验证你的猜想，并将数据记录在以下表格</p>
     </div>
     <div class="data-table">
@@ -78,7 +78,6 @@ export default {
   .question-stem {
     margin-bottom: 30px;
     p {
-      font-weight: bold;
       margin: 20px 0;
     }
   }

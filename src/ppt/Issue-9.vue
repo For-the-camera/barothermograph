@@ -1,7 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-import img1 from "../assets/images/10-2.jpg"
-import img2 from "../assets/images/10-3.jpg"
+import img1 from "../assets/images/10-2.jpg";
+import img2 from "../assets/images/10-3.jpg";
 
 export default {
   name: "Test1",
@@ -28,17 +28,11 @@ export default {
   methods: {
     selectOption: function (index) {
       if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref-issue-9-${this.selectedOption}`][0].style.color =
-          "black";
         this.selectedOption = null;
         this.store.answer.issue9 = "";
       } else {
-        if (this.selectedOption) {
-          this.$refs[`ref-issue-9-${this.selectedOption}`][0].style.color =
-            "black";
-        }
         this.selectedOption = index;
-        this.$refs[`ref-issue-9-${index}`][0].style.color = "red";
+
         this.store.answer.issue9 = index;
       }
     },
@@ -59,17 +53,20 @@ export default {
         </div>
       </div>
       <p style="margin: 20px 0">
-        有甲乙两简易温度计，乙温度计的吸管细一些，左图分别录了某一天液柱的变化情况，请你判断乙温度计对应的刻度曲线是
+        小明使用大小相同的两个瓶子分别做了以上甲乙两支简易温度计，记录同一天不同时段甲乙两支温度计管内液柱高度的变化情况，得到变化曲线A和变化曲线B，请你判断乙温度计对应的曲线是
+        <span style="padding-right: 40px;">（</span>
+        <span>{{ selectedOption }}</span>
+        <span style="padding-left: 40px;">）</span>
       </p>
     </div>
     <ol>
-      <li
-        v-for="option in options"
-        @click="selectOption(option.value)"
-        :ref="'ref-issue-9-' + option.value"
-      >
-        {{ option.lable }}
-      </li>
+      <el-radio-group v-model="selectedOption">
+        <li v-for="option in options" @click="selectOption(option.value)">
+          <el-radio :label="option.value">{{ "" }}</el-radio>
+          {{ option.value }}.
+          {{ option.lable }}
+        </li>
+      </el-radio-group>
     </ol>
   </div>
 </template>
@@ -98,17 +95,16 @@ export default {
       }
     }
     p{
-      font-weight: bold;
+      line-height: 2;
     }
   }
   ol {
     list-style-position: inside;
-    list-style-type: upper-alpha;
+    list-style-type: none;
     li {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      font-weight: 600;
     }
   }
 }

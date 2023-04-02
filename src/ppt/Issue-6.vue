@@ -11,15 +11,18 @@ export default {
       options: [
         {
           label: "猜想1",
-          value: "瓶子的大小对液柱变化明显程度不会产生影响",
+          value: "瓶子越大，升温相同时液柱变化得越明显",
+          answer: "A",
         },
         {
           label: "猜想2",
-          value: "瓶子越大，相同升温时液柱变化得越明显",
+          value: "瓶子越小，升温相同时液柱变化得越明显",
+          answer: "B",
         },
         {
           label: "猜想3",
-          value: "瓶子越小，相同升温时液柱变化得越明显",
+          value: "瓶子的大小对液柱变化明显程度不会产生影响",
+          answer: "C",
         },
       ],
       currentSelect: null,
@@ -27,10 +30,10 @@ export default {
     };
   },
   methods: {
-    selectOption: function (index) {
-      this.currentSelect = index;
-      const { label, value } = this.options[index];
-      this.store.answer.issue6.guess = label + "：" + value;
+    selectOption: function (option) {
+      this.currentSelect = option.answer;
+      this.store.answer.issue6.guessNo = option.answer;
+      this.store.answer.issue6.guess = option.value;
     },
   },
 };
@@ -43,29 +46,34 @@ export default {
         ，小刚、小红和小明分别提出以下猜想
       </p>
     </div>
-    <div class="question-stem">
+
+    <div class="questiton-stem">
       <p v-for="(option, index) in options" :key="index">
         {{ option.label + "：" + option.value }}
       </p>
     </div>
     <div class="question-stem">
-      <span>你认为</span>
-      <el-dropdown @command="selectOption">
-        <span style="color: #409eff; padding: 0 10px">
-          {{ currentSelect !== null ? options[currentSelect].label : "猜想"
-          }}<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            v-for="(option, index) in options"
-            :key="option.value"
-            :command="index"
-            >{{ option.label }}</el-dropdown-item
-          >
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>是正确的，请在下方填写你的判断理由</span>
+      <p>
+        你认为以上哪一个猜想是正确的
+        <span style="padding-right: 40px">（</span>
+        <span>{{ currentSelect }}</span>
+        <span style="padding-left: 40px">）</span>
+      </p>
     </div>
+    <ul>
+      <el-radio-group v-model="currentSelect">
+        <li
+          v-for="item in options"
+          :key="item.answer"
+          @click="selectOption(item)"
+        >
+          <el-radio :label="item.answer">{{ "" }}</el-radio>
+          {{ item.answer }}. {{ item.value }}
+        </li>
+      </el-radio-group>
+    </ul>
+
+    <p style="margin: 10px 0">请在下方空白方框处填写你判断的理由</p>
     <div>
       <el-input
         type="textarea"
@@ -79,9 +87,17 @@ export default {
 <style scoped lang="scss">
 .page-container {
   padding: 10px;
-  p,
-  span {
-    font-weight: bold;
+  p {
+    line-height: 2;
+  }
+  ul {
+    list-style: none;
+    list-style-position: inside;
+    li {
+      cursor: pointer;
+      padding: 10px 0;
+      font-size: 1rem;
+    }
   }
   .question-stem {
     margin: 20px 0;

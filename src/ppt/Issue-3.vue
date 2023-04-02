@@ -15,17 +15,17 @@ export default {
       img3,
       options: [
         {
-          label: "更换大一些的瓶子",
+          label: "更换容积大一些的瓶子",
           value: "A",
           checked: false,
         },
         {
-          label: "更换更粗的吸管",
+          label: "更换容积小一些的瓶子",
           value: "B",
           checked: false,
         },
         {
-          label: "更换小一些的瓶子",
+          label: "更换更粗的吸管",
           value: "C",
           checked: false,
         },
@@ -34,26 +34,25 @@ export default {
           value: "D",
           checked: false,
         },
+        {
+          label: "更换更硬的吸管",
+          value: "E",
+          checked: false,
+        }
       ],
-      selectedOption: null,
+      selectedOption: [],
     };
   },
   methods: {
     selectOption: function (index) {
-      if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref-issue-3-${this.selectedOption}`][0].style.color =
-          "black";
-        this.selectedOption = null;
-        this.store.answer.issue3 = "";
+      const answerIndex = this.selectedOption.indexOf(index);
+      if (answerIndex === -1) {
+        this.selectedOption.push(index);
       } else {
-        if (this.selectedOption) {
-          this.$refs[`ref-issue-3-${this.selectedOption}`][0].style.color =
-            "black";
-        }
-        this.selectedOption = index;
-        this.$refs[`ref-issue-3-${index}`][0].style.color = "red";
-        this.store.answer.issue3 = index;
+        this.selectedOption.splice(answerIndex, 1);
       }
+      this.selectedOption.sort();
+      this.store.answer.issue3 = this.selectedOption;
     },
   },
 };
@@ -62,17 +61,23 @@ export default {
   <div class="page-container">
     <div class="question">
       <p>
-        小红发现按照课本示例自制温度计时，当外接的温度上升时，吸管内液柱有变化但并不明显，为了解决该问题，他们提出以下几种可能的措施，你认为可行的是
+        （多选）小红发现当外界的温度上升时，该“简易温度计”吸管内的液柱上升并不明显，这样会影响温度计的准确性。为了解决该问题，你认为以下可行的改进方案是
+        <span style="padding-right: 30px">（</span>
+        <span v-for="answer in selectedOption" :key="answer" style="padding: 0 10px;">{{ answer }}</span>
+        <span style="padding-left: 30px">）</span>
       </p>
       <ul>
-        <li
-          v-for="(option, index) in options"
-          :key="index"
-          :ref="'ref-issue-3-' + option.value"
-          @click="selectOption(option.value)"
-        >
-          {{ option.label }}
-        </li>
+        <el-checkbox-group v-model="selectedOption">
+          <li
+            v-for="(option, index) in options"
+            :key="index"
+            @click="selectOption(option.value)"
+          >
+            <el-checkbox :label="option.value">{{ "" }}</el-checkbox>
+            {{ option.value }}.
+            {{ option.label }}
+          </li>
+        </el-checkbox-group>
       </ul>
     </div>
     <div class="images">
@@ -89,18 +94,17 @@ export default {
 
   p {
     font-size: 20px;
-    color: red;
+    line-height: 2;
     margin-bottom: 50px;
-    font-weight: bold;
   }
   ul {
-    list-style: upper-alpha;
+    list-style: none;
     list-style-position: inside;
     li {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      font-weight: 600;
+      
     }
   }
   .images {

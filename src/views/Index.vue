@@ -106,8 +106,8 @@ export default {
 <style lang="scss" scoped>
 $ppt-border: 5px;
 $ppt-padding: 5px;
-$ppt-bg-left: #e2f0d9;
-$ppt-bg-right: #fff2cc;
+$ppt-bg-left: #55e6c1;
+$ppt-bg-right: #f6e58d;
 $ppt-border-radius: 30px;
 $single-padding: 30px;
 $ppt-border-basic: .1rem solid #353b48;

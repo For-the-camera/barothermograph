@@ -8,6 +8,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      selectedOption:"",
       tableData: [
         {
           bottleSize: "中",
@@ -19,7 +20,7 @@ export default {
           bottleSize: "中",
           pipeSize: "粗",
           temp: 20,
-          spoutHeight: 1.5,
+          spoutHeight: 1.4,
         },
         {
           bottleSize: "中",
@@ -31,7 +32,7 @@ export default {
           bottleSize: "中",
           pipeSize: "中",
           temp: 20,
-          spoutHeight: 2.5,
+          spoutHeight: 2.6,
         },
         {
           bottleSize: "中",
@@ -43,7 +44,7 @@ export default {
           bottleSize: "中",
           pipeSize: "细",
           temp: 20,
-          spoutHeight: 5.8,
+          spoutHeight: 4.6,
         },
       ],
       options: [
@@ -73,17 +74,11 @@ export default {
   methods: {
     selectOption: function (index) {
       if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref-issue-5-${this.selectedOption}`][0].style.color =
-          "black";
         this.selectedOption = null;
         this.store.answer.issue5 = "";
       } else {
-        if (this.selectedOption) {
-          this.$refs[`ref-issue-5-${this.selectedOption}`][0].style.color =
-            "black";
-        }
         this.selectedOption = index;
-        this.$refs[`ref-issue-5-${index}`][0].style.color = "red";
+
         this.store.answer.issue5 = index;
       }
     },
@@ -97,16 +92,25 @@ export default {
         为探究
         “吸管的粗细是否对液柱变化明显程度产生影响”，小红收集到一下实验数据。
       </p>
-      <p>根据实验数据，你认为以下结论正确的是</p>
+      <p>
+        根据实验数据，你认为以下结论正确的是
+        <span style="padding-right: 40px;">（</span>
+        <span>{{ selectedOption }}</span>
+        <span style="padding-left: 40px;">）</span>
+      </p>
       <ol>
-        <li
-          v-for="option in options"
-          :key="option.value"
-          :ref="`ref-issue-5-` + option.value"
-          @click="selectOption(option.value)"
-        >
-          {{ option.label }}
-        </li>
+        <el-radio-group v-model="selectedOption">
+          <li
+            v-for="option in options"
+            :key="option.value"
+            @click="selectOption(option.value)"
+          >
+            <el-radio :label="option.value">{{ "" }}</el-radio>
+            {{ option.value }}.
+            {{ option.label }}
+            
+          </li>
+        </el-radio-group>
       </ol>
     </div>
     <el-table border style="width: 100%" :data="tableData" :max-height="290">
@@ -123,18 +127,17 @@ export default {
   padding: 10px;
   p {
     margin: 16px 0;
-    font-size: 20px;
-    font-weight: bold;
+    line-height: 2;
   }
   ol {
     list-style-position: inside;
-    list-style-type: upper-alpha;
+    list-style-type: none;
     margin: 40px 0;
     li {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      font-weight: 600;
+      
     }
   }
   ::v-deep .el-table tr {

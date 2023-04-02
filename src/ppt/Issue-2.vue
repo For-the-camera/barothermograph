@@ -1,7 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-import img1 from "../assets/images/3-1.jpg"
-
+import img1 from "../assets/images/3-1.jpg";
 
 export default {
   name: "Issue2",
@@ -39,17 +38,12 @@ export default {
   methods: {
     selectOption: function (index) {
       if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref-issue-2-${this.selectedOption}`][0].style.color =
-          "black";
         this.selectedOption = null;
         this.store.answer.issue2 = "";
       } else {
         if (this.selectedOption) {
-          this.$refs[`ref-issue-2-${this.selectedOption}`][0].style.color =
-            "black";
         }
         this.selectedOption = index;
-        this.$refs[`ref-issue-2-${index}`][0].style.color = "red";
         this.store.answer.issue2 = index;
       }
     },
@@ -59,16 +53,25 @@ export default {
 <template>
   <div class="page-container">
     <div class="question">
-      <p>该温度计的基本原理是</p>
+      <p>
+        根据你所学的知识，请你判断该“简易温度计”的基本原理是
+        <span style="padding-right: 40px">（</span>
+        <span>{{ this.selectedOption }}</span>
+        <span style="padding-left: 40px">）</span>
+      </p>
       <ul>
-        <li
-          v-for="(option, index) in options"
-          :key="index"
-          :ref="'ref-issue-2-' + option.value"
-          @click="selectOption(option.value)"
-        >
-          {{ option.label }}
-        </li>
+        <el-radio-group v-model="selectedOption">
+          <li
+            v-for="(option, index) in options"
+            :key="index"
+            :ref="'ref-issue-2-' + option.value"
+            @click="selectOption(option.value)"
+          >
+            <el-radio :label="option.value">{{ "" }}</el-radio>
+            {{ option.value }}.
+            {{ option.label }}
+          </li>
+        </el-radio-group>
       </ul>
     </div>
     <div>
@@ -87,13 +90,12 @@ export default {
     line-height: 3rem;
   }
   ul {
-    list-style: upper-alpha;
+    list-style: none;
     list-style-position: inside;
     li {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      font-weight: 600;
     }
   }
 }

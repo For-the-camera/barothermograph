@@ -61,7 +61,7 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    font-weight: bold;
+    line-height: 2;
     margin: 20px 0;
   }
   ::v-deep .el-table tr {

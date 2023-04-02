@@ -133,6 +133,9 @@ export default {
       const g = 1000 / sum + f;
       const result = C * g; // 结果
       const H = (result / this.maxSpoutHeight) * 10;
+      if (T === 10) {
+        return 0;
+      }
       return H > 10 ? 10 : H.toFixed(1);
     },
     // 刻度值转换为水柱高度
@@ -261,7 +264,7 @@ export default {
         </div>
       </div>
       <div class="ctrl">
-        <p>温度调节</p>
+        <span style="background-color: yellow;">温度调节</span>
         <div class="marks">
           <div class="scale">
             <span v-for="i in [10, 15, 20, 25, 30]" :key="i">{{ i }}</span>
@@ -273,7 +276,9 @@ export default {
           </div>
         </div>
         <el-slider v-model="temp" :min="10" :max="30"></el-slider>
-        <el-button @click="postRecord" :disabled="!store.nowPage.actionIndex">记录</el-button>
+        <el-button  type="success" @click="postRecord" :disabled="!store.nowPage.actionIndex"
+          >记录</el-button
+        >
       </div>
     </div>
   </div>

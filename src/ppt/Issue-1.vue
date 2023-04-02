@@ -65,7 +65,10 @@ export default {
     <div class="left">
       <img :src="img1" class="question-stem" alt="" />
       <p>
-        下图是某一天各个时段气温的曲线，右图拍照的时间是8:00，请你判断下午16:00时，该“简易温度计”的刻度应该是以下哪张图
+        上图是某一天各个时段气温的记录曲线，右图拍照的时间是上午8:00，请你判断以下哪张照片应该是下午16:00时拍摄的
+        <span style="padding-right: 40px;">（</span>
+        <span>{{ this.selectedOption }}</span>
+        <span style="padding-left: 40px;">）</span>
       </p>
       <div class="options" ref="optionsRef">
         <div
@@ -91,7 +94,7 @@ export default {
   display: flex;
   .left {
     width: 70%;
-    p{
+    p {
       line-height: 3rem;
       font-size: 1.25rem;
     }
@@ -107,12 +110,11 @@ export default {
         cursor: pointer;
         img {
           width: 151px;
-          height: 353px;
+          height: 300px;
         }
         p {
           text-align: center;
           font-size: 24px;
-
         }
         .checked {
           color: red;

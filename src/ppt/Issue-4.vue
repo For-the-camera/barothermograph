@@ -47,11 +47,16 @@ export default {
 <template>
   <div class="page-container">
     <div>
-      <p>左图是一个实验模拟器,</p>
+      <p>
+        左图是一个实验模拟器，如果你想了解如何使用该实验模拟器，请尝试以下操作：
+      </p>
       <ol>
         <li>选择不同大小的瓶子</li>
-        <li>选择不同粗细的管子</li>
-        <li>调节温度按钮观察液柱高度变化</li>
+        <li>选择不同粗细的吸管</li>
+        <li>
+          调节温度按钮观察液柱变化，模拟器自动显示管内液面高度；<br>
+          （当温度是10℃时，管内液面恰好与瓶口向平）
+        </li>
         <li>点击记录按钮，可将数据记录在以下表格中</li>
       </ol>
     </div>
@@ -88,12 +93,12 @@ export default {
     list-style-position: inside;
     li {
       padding: 10px 0;
-      font-weight: bold;
+      
     }
   }
   p {
-    font-size: 20px;
-    font-weight: bold;
+    line-height: 2;
+    
   }
   ::v-deep .el-table tr {
     height: 25px;
