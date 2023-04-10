@@ -101,7 +101,7 @@ $wait-color: #bbb7ad;
   align-items: center;
   justify-content: space-between;
 
-  padding-left: 20px;
+  padding-left: 10px;
   .item {
     display: flex;
     align-items: center;
@@ -112,7 +112,7 @@ $wait-color: #bbb7ad;
       align-items: center;
       padding: 20px 0px 13px 0px;
       .step-title {
-        font-size: 16px;
+        font-size: 14px;
       }
       .step-index {
         width: 23px;

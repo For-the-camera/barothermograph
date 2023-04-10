@@ -49,22 +49,22 @@ export default {
       ],
       options: [
         {
-          label: "瓶子的热胀冷缩",
+          label: "吸管越粗，液柱变化越明显",
           value: "A",
           checked: false,
         },
         {
-          label: "液体的热胀冷缩",
+          label: "吸管越细，液柱变化越明显",
           value: "B",
           checked: false,
         },
         {
-          label: "吸管的热胀冷缩",
+          label: "吸管越细，液柱变化越不明显",
           value: "C",
           checked: false,
         },
         {
-          label: "液体具有蒸发作用",
+          label: "液柱变化与吸管粗细无关",
           value: "D",
           checked: false,
         },

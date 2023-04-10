@@ -61,7 +61,7 @@ export default {
   <div class="page-container">
     <div class="question">
       <p>
-        （多选）小红发现当外界的温度上升时，该“简易温度计”吸管内的液柱上升并不明显，这样会影响温度计的准确性。为了解决该问题，你认为以下可行的改进方案是
+        （多选）小红发现当外界的温度上升时，该“简易温度计”吸管内的液柱上升并不明显，为了解决该问题，你认为以下可行的改进方案是
         <span style="padding-right: 30px">（</span>
         <span v-for="answer in selectedOption" :key="answer" style="padding: 0 10px;">{{ answer }}</span>
         <span style="padding-left: 30px">）</span>

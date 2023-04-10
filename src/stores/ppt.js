@@ -12,11 +12,11 @@ export const usePPTStore = defineStore("ppt", {
       issue6: {
         guessNo: "",
         guess: "",
-        reason: ""
       },
       issue7: [],
       issue8: "",
-      issue9: ""
+      issue9: "",
+      issueExtra1: "",
     },
 
     putData: {

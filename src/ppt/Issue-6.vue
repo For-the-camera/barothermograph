@@ -73,7 +73,7 @@ export default {
       </el-radio-group>
     </ul>
 
-    <p style="margin: 10px 0">请在下方空白方框处填写你判断的理由</p>
+    <!-- <p style="margin: 10px 0">请在下方空白方框处填写你判断的理由</p>
     <div>
       <el-input
         type="textarea"
@@ -81,7 +81,7 @@ export default {
         @blur="store.answer.issue6.reason = reason"
         :rows="5"
       ></el-input>
-    </div>
+    </div> -->
   </div>
 </template>
 <style scoped lang="scss">
