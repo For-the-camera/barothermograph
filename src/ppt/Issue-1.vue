@@ -42,19 +42,28 @@ export default {
   },
   methods: {
     selectOption: function (index) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       if (this.selectedOption === index && this.selectedOption) {
-        this.$refs[`ref-issue-1-${this.selectedOption}`][0].style.color =
-          "black";
         this.selectedOption = null;
-        this.store.answer.issue1 = "";
-      } else {
-        if (this.selectedOption) {
-          this.$refs[`ref-issue-1-${this.selectedOption}`][0].style.color =
-            "black";
+        if (this.store.nowPage.firstEnterInto) {
+          this.store.answer.issue1.firstResult = "";
+          this.store.answer.issue1.lastResult = "";
+        } else {
+          this.store.answer.issue1.lastResult = "";
         }
+      } else {
         this.selectedOption = index;
-        this.$refs[`ref-issue-1-${index}`][0].style.color = "red";
-        this.store.answer.issue1 = index;
+        if (
+          this.store.nowPage.firstEnterInto ||
+          this.store.answer.issue1.firstResult === ""
+        ) {
+          this.store.answer.issue1.firstResult = index;
+          this.store.answer.issue1.lastResult = index;
+        } else {
+          this.store.answer.issue1.lastResult = index;
+        }
       }
     },
   },
@@ -84,7 +93,7 @@ export default {
     </div>
     <div class="right">
       <img :src="img1" class="question-stem" alt="" />
-      <img :src="img2" style="height: 400px;width: auto;" alt="" />
+      <img :src="img2" style="height: 400px; width: auto" alt="" />
       <p>上午9:00</p>
     </div>
   </div>
@@ -138,7 +147,7 @@ export default {
       font-size: 18px;
     }
   }
-  ::v-deep .el-radio__label{
+  ::v-deep .el-radio__label {
     font-size: 18px;
   }
 }

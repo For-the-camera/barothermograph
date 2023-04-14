@@ -36,6 +36,9 @@ export default {
   },
   methods: {
     selectOption: function (index) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       const answerIndex = this.selectedOption.indexOf(index);
       if (answerIndex === -1) {
         this.selectedOption.push(index);
@@ -43,7 +46,15 @@ export default {
         this.selectedOption.splice(answerIndex, 1);
       }
       this.selectedOption.sort();
-      this.store.answer.issue3 = this.selectedOption;
+      if (
+        this.store.nowPage.firstEnterInto ||
+        this.store.answer.issue3.firstResult.length === 0
+      ) {
+        this.store.answer.issue3.firstResult = this.selectedOption;
+        this.store.answer.issue3.lastResult = this.selectedOption;
+      } else {
+        this.store.answer.issue3.lastResult = this.selectedOption;
+      }
     },
   },
 };
@@ -96,7 +107,7 @@ export default {
     display: flex;
     align-items: center;
     height: 100%;
-    img{
+    img {
       height: 500px;
       width: auto;
     }

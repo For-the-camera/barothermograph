@@ -37,14 +37,28 @@ export default {
   },
   methods: {
     selectOption: function (index) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       if (this.selectedOption === index && this.selectedOption) {
         this.selectedOption = null;
-        this.store.answer.issue2 = "";
-      } else {
-        if (this.selectedOption) {
+        if (this.store.nowPage.firstEnterInto) {
+          this.store.answer.issue2.firstResult = "";
+          this.store.answer.issue2.lastResult = "";
+        } else {
+          this.store.answer.issue2.lastResult = "";
         }
+      } else {
         this.selectedOption = index;
-        this.store.answer.issue2 = index;
+        if (
+          this.store.nowPage.firstEnterInto ||
+          this.store.answer.issue2.firstResult === ""
+        ) {
+          this.store.answer.issue2.firstResult = index;
+          this.store.answer.issue2.lastResult = index;
+        } else {
+          this.store.answer.issue2.lastResult = index;
+        }
       }
     },
   },
@@ -70,7 +84,7 @@ export default {
       </ul>
     </div>
     <div>
-      <img :src="img1" style="height: 500px;width: auto;" alt="" />
+      <img :src="img1" style="height: 500px; width: auto" alt="" />
     </div>
   </div>
 </template>

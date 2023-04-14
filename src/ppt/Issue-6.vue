@@ -31,9 +31,22 @@ export default {
   },
   methods: {
     selectOption: function (option) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       this.currentSelect = option.answer;
-      this.store.answer.issue6.guessNo = option.answer;
-      this.store.answer.issue6.guess = option.value;
+      if (
+        this.store.nowPage.firstEnterInto ||
+        this.store.answer.issue6.firstResult.guessNo === ""
+      ) {
+        this.store.answer.issue6.firstResult.guessNo = option.answer;
+        this.store.answer.issue6.firstResult.guess = option.value;
+        this.store.answer.issue6.lastResult.guessNo = option.answer;
+        this.store.answer.issue6.lastResult.guess = option.value;
+      } else {
+        this.store.answer.issue6.lastResult.guessNo = option.answer;
+        this.store.answer.issue6.lastResult.guess = option.value;
+      }
     },
   },
 };
@@ -53,12 +66,7 @@ export default {
       </p>
     </div>
     <div class="question-stem">
-      <p>
-        你认为以上哪一个猜想是正确的
-        <span style="padding-right: 40px">（</span>
-        <span>{{ currentSelect }}</span>
-        <span style="padding-left: 40px">）</span>
-      </p>
+      <p>你认为以上哪一个猜想是正确的</p>
     </div>
     <ul>
       <el-radio-group v-model="currentSelect">

@@ -189,6 +189,9 @@ export default {
       }
     },
     postRecord: function () {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       const postSite = this.store.nowPage.actionIndex;
       if (this.currentBottleIndex !== null && this.currentPipeIndex !== null) {
         const data = {
@@ -197,7 +200,12 @@ export default {
           temp: this.temp,
           spoutHeight: this.spoutHeight,
         };
-        this.store.answer[postSite].push(data);
+        if (this.store.nowPage.firstEnterInto) {
+          this.store.answer[postSite].firstResult.push(data);
+          this.store.answer[postSite].lastResult.push(data);
+        } else {
+          this.store.answer[postSite].lastResult.push(data);
+        }
         this.store.putData[`${postSite}`] = true;
         if (postSite === "issue7") {
           this.store.putData["issue8"] = true;
@@ -217,7 +225,11 @@ export default {
         @click="checkedBottle(bottle.size, index)"
       >
         <div>
-          <img :src="bottle.imageName" style="height: auto; width: 100px;" alt="" />
+          <img
+            :src="bottle.imageName"
+            style="height: auto; width: 100px"
+            alt=""
+          />
         </div>
         <p>{{ bottle.label }}</p>
         <div class="radio" :ref="`ref-bottle-${bottle.size}`"></div>
@@ -229,7 +241,7 @@ export default {
         @click="checkedPipe(pipe.size, pipe.width, index)"
       >
         <div>
-          <img :src="pipe.imageName"  alt="" />
+          <img :src="pipe.imageName" alt="" />
         </div>
         <p>{{ pipe.label }}</p>
         <div class="radio" :ref="`ref-pipe-${pipe.size}`"></div>

@@ -13,7 +13,7 @@ export default {
   methods: {},
   mounted(){
     this.store.nowPage.enterInto = Date.now();
-  }
+  },
 };
 </script>
 <template>

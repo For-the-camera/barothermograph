@@ -9,7 +9,24 @@ export default {
       reason: "",
     };
   },
-  methods: {},
+  methods: {
+    startResponse() {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
+    },
+    postAnswer() {
+      if (
+        this.store.nowPage.firstEnterInto ||
+        this.store.answer.issueExtra1.firstResult === ""
+      ) {
+        this.store.answer.issueExtra1.firstResult = this.reason;
+        this.store.answer.issueExtra1.lastResult = this.reason;
+      } else {
+        this.store.answer.issueExtra1.lastResult = this.reason;
+      }
+    },
+  },
 };
 </script>
 <template>
@@ -22,7 +39,8 @@ export default {
         type="textarea"
         :rows="5"
         v-model="reason"
-        @blur="store.answer.issueExtra1 = reason"
+        @focus="startResponse"
+        @blur="postAnswer"
       ></el-input>
     </div>
   </div>

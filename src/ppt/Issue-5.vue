@@ -73,13 +73,28 @@ export default {
   },
   methods: {
     selectOption: function (index) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
       if (this.selectedOption === index && this.selectedOption) {
         this.selectedOption = null;
-        this.store.answer.issue5 = "";
+        if (this.store.nowPage.firstEnterInto) {
+          this.store.answer.issue5.firstResult = "";
+          this.store.answer.issue5.lastResult = "";
+        } else {
+          this.store.answer.issue5.lastResult = "";
+        }
       } else {
         this.selectedOption = index;
-
-        this.store.answer.issue5 = index;
+        if (
+          this.store.nowPage.firstEnterInto ||
+          this.store.answer.issue5.firstResult === ""
+        ) {
+          this.store.answer.issue5.firstResult = index;
+          this.store.answer.issue5.lastResult = index;
+        } else {
+          this.store.answer.issue5.lastResult = index;
+        }
       }
     },
   },

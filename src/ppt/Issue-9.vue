@@ -26,14 +26,19 @@ export default {
     };
   },
   methods: {
-    selectOption: function (index) {
-      if (this.selectedOption === index && this.selectedOption) {
-        this.selectedOption = null;
-        this.store.answer.issue9 = "";
+    selectOption: function (option) {
+      if (this.store.nowPage.firstEvent === 0) {
+        this.store.nowPage.firstEvent = Date.now();
+      }
+      this.selectedOption = option;
+      if (
+        this.store.nowPage.firstEnterInto ||
+        this.store.answer.issue9.firstResult === ""
+      ) {
+        this.store.answer.issue9.firstResult = option;
+        this.store.answer.issue9.lastResult = option;
       } else {
-        this.selectedOption = index;
-
-        this.store.answer.issue9 = index;
+        this.store.answer.issue9.lastResult = option;
       }
     },
   },
@@ -54,12 +59,14 @@ export default {
       </div>
       <p style="margin: 20px 0">
         小明使用大小相同的两个瓶子分别做了以上甲乙两支简易温度计，记录同一天不同时段甲乙两支温度计管内液柱高度的变化情况，得到变化曲线A和变化曲线B，请你判断乙温度计对应的曲线是
-        
       </p>
     </div>
     <ol>
       <el-radio-group v-model="selectedOption">
-        <li v-for="option in options" @click.prevent="selectOption(option.value)">
+        <li
+          v-for="option in options"
+          @click.prevent="selectOption(option.value)"
+        >
           <el-radio :label="option.value">{{ "" }}</el-radio>
           {{ option.value }}.
           {{ option.lable }}
@@ -92,7 +99,7 @@ export default {
         }
       }
     }
-    p{
+    p {
       line-height: 2;
     }
   }

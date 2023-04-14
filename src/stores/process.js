@@ -1,0 +1,50 @@
+import { defineStore } from "pinia";
+
+export const useProcessStore = defineStore("process", {
+  state: () => ({
+    page1:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page2:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page3:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page4:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page5:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page6:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page7:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page8:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page9:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page10:{
+      totalTime:0,
+      responseTime:0,
+    },
+    page11:{
+      totalTime:0,
+      responseTime:0,
+    },
+  }),
+});

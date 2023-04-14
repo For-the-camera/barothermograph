@@ -8,17 +8,22 @@ export default {
     const store = usePPTStore();
     return {
       store,
-      tableData: [{}, {}, {}, {}, {}, {}, {}, {}],
+      tableData: [],
     };
   },
   methods: {
     deleteRowData(index) {
-      this.store.answer.issue4.splice(index, 1);
-      this.store.answer.issue4.forEach((item, i) => {
+      if (this.store.nowPage.firstEvent) {
+        this.store.answer.issue4.firstResult.splice(index, 1);
+        this.store.answer.issue4.lastResult.splice(index, 1);
+      } else {
+        this.store.answer.issue4.lastResult.splice(index, 1);
+      }
+      this.store.answer.issue4.lastResult.forEach((item, i) => {
         this.$set(this.tableData, i, item);
       });
       this.tableData.forEach((item, i) => {
-        if (i + 1 > this.store.answer.issue4.length) {
+        if (i + 1 > this.store.answer.issue4.lastResult.length) {
           this.$set(this.tableData, i, {});
           if (i > 7) {
             this.tableData.splice(i, 1);
@@ -28,14 +33,14 @@ export default {
     },
   },
   mounted() {
-    if (this.store.answer.issue4.length > 0) {
-      this.store.answer.issue4.forEach((item, index) => {
+    if (this.store.answer.issue4.lastResult.length > 0) {
+      this.store.answer.issue4.lastResult.forEach((item, index) => {
         this.$set(this.tableData, index, item);
       });
     }
     this.$watch("store.putData.issue4", function (val) {
       if (val) {
-        this.store.answer.issue4.forEach((item, index) => {
+        this.store.answer.issue4.lastResult.forEach((item, index) => {
           this.$set(this.tableData, index, item);
         });
         this.store.putData.issue4 = false;
@@ -66,16 +71,19 @@ export default {
           <div class="inline-triangle">
             <div class="inline-triangle-inner"></div>
           </div>
-          <span>观察液柱变化，模拟器自动显示管内液面高度；</span></li>
+          <span>观察液柱变化，模拟器自动显示管内液面高度；</span>
+        </li>
         <li>
-          <span style="padding-right: 5px;">点击</span>
-          <span style="background-color: #67c23a; padding: 0 5px; color: white;">记录</span>
-          <span style="padding-left: 5px;">按钮，可将数据记录在以下表格中</span>
+          <span style="padding-right: 5px">点击</span>
+          <span style="background-color: #67c23a; padding: 0 5px; color: white"
+            >记录</span
+          >
+          <span style="padding-left: 5px">按钮，可将数据记录在以下表格中</span>
         </li>
       </ol>
     </div>
     <div class="data-table">
-      <el-table border style="width: 100%" :data="tableData" :max-height="340">
+      <el-table border style="width: 100%;height: 340px;" :data="tableData" :max-height="340">
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
         <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
         <el-table-column prop="temp" label="温度(℃)"></el-table-column>
@@ -119,7 +127,7 @@ export default {
         margin: 0 10px;
         border: 1px solid #1890ff;
       }
-      .inline-triangle{
+      .inline-triangle {
         display: inline-block;
         margin: 0 20px;
         position: relative;
@@ -150,22 +158,22 @@ export default {
 
   .data-table {
     width: 550px;
-    
+
     ::v-deep .el-table__header-wrapper table thead tr th {
       background-color: #fafafa;
       border-bottom: 1px solid #e8e8e8;
       border-right: none;
       padding: 10px 5px;
-      div{
+      div {
         text-align: center;
         padding: 0;
       }
     }
-    ::v-deep .el-table__body-wrapper table tbody tr td{
+    ::v-deep .el-table__body-wrapper table tbody tr td {
       padding: 0;
       height: 33px;
       border-right: none;
-      div{
+      div {
         text-align: center;
         padding: 0;
       }

@@ -1,5 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 
 export default {
   props: {
@@ -9,9 +10,11 @@ export default {
     },
   },
   data() {
+    const processStore = useProcessStore();
     return {
       renderList: this.transformData(this.config),
       store: usePPTStore(),
+      processStore,
     };
   },
   methods: {
@@ -24,13 +27,20 @@ export default {
         const next = this.renderList[index + 1];
         next.state = "process";
         this.$set(this.renderList, index + 1, next);
-        this.store.nowPage = this.renderList[index + 1];
-        const nowTime = Date.now();
-        this.store.nowPage.enterInto = nowTime;
+        // 记录当前页面的离开时间
+        const leaveTime = Date.now();
+        this.store.nowPage.leave = leaveTime;
+        // 将首次进入标志设置为 false
         if (this.store.nowPage.firstEnterInto) {
-          this.store.nowPage.firstEnterInto = false
+          this.store.nowPage.firstEnterInto = false;
         }
-
+        this.recordProcessData(this.store.nowPage);
+        this.store.nowPage.firstEvent = 0;
+        // ----------- 渲染下一页 ---------------
+        this.store.nowPage = this.renderList[index + 1];
+        // 记录新页面的进入时间
+        const enterTime = Date.now();
+        this.store.nowPage.enterInto = enterTime;
       }
     },
     back() {
@@ -42,9 +52,14 @@ export default {
         const later = this.renderList[index - 1];
         later.state = "process";
         this.$set(this.renderList, index - 1, later);
+        const leaveTime = Date.now();
+        this.store.nowPage.leave = leaveTime;
+        this.recordProcessData(this.store.nowPage);
+        this.store.nowPage.firstEvent = 0;
+        // ----------- 渲染上一页 ---------------
         this.store.nowPage = this.renderList[index - 1];
-        const nowTime = Date.now();
-        this.store.nowPage.leave = nowTime;
+        const enterTime = Date.now();
+        this.store.nowPage.enterInto = enterTime;
       }
     },
     transformData: (configList) => {
@@ -57,6 +72,22 @@ export default {
         }
         return config;
       });
+    },
+    recordProcessData(page) {
+      const { enterInto, leave, index, firstEvent } = page;
+      const { totalTime, responseTime } = this.processStore[`page${index}`];
+      this.processStore[`page${index}`] = {
+        totalTime:
+          totalTime === 0 ? leave - enterInto : totalTime + leave - enterInto,
+        responseTime:
+          firstEvent === 0
+            ? responseTime === 0
+              ? 0
+              : responseTime
+            : responseTime === 0
+            ? leave - firstEvent
+            : responseTime + leave - firstEvent,
+      };
     },
   },
   mounted() {

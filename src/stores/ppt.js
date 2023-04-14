@@ -4,19 +4,52 @@ export const usePPTStore = defineStore("ppt", {
   state: () => ({
     nowPage: {},
     answer: {
-      issue1: "",
-      issue2: "",
-      issue3: [],
-      issue4: [],
-      issue5: "",
-      issue6: {
-        guessNo: "",
-        guess: "",
+      issue1: {
+        firstResult: "",
+        lastResult: "",
       },
-      issue7: [],
-      issue8: "",
-      issue9: "",
-      issueExtra1: "",
+      issue2: {
+        firstResult: "",
+        lastResult: "",
+      },
+      issue3: {
+        firstResult: [],
+        lastResult: [],
+      },
+      issue4: {
+        firstResult: [],
+        lastResult: [],
+      },
+      issue5: {
+        firstResult: "",
+        lastResult: "",
+      },
+      issue6: {
+        firstResult: {
+          guessNo: "",
+          guess: "",
+        },
+        lastResult: {
+          guessNo: "",
+          guess: "",
+        },
+      },
+      issue7: {
+        firstResult: [],
+        lastResult: [],
+      },
+      issue8: {
+        firstResult: "",
+        lastResult: "",
+      },
+      issue9: {
+        firstResult: "",
+        lastResult: "",
+      },
+      issueExtra1: {
+        firstResult: "",
+        lastResult: "",
+      },
     },
 
     putData: {
