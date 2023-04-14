@@ -15,7 +15,7 @@ export default {
 <template>
   <div class="page-container">
     <p>
-      小红根据实验数据得出以下结论：吸管越细，液柱变化越明显；请你解释吸管越细液柱变化越明显的原因。
+      小红根据实验数据得出以下结论：吸管越细，液柱变化越明显；请你运用所学知识，解释吸管越细液柱变化越明显的原因。
     </p>
     <div class="input-area">
       <el-input

@@ -1,14 +1,19 @@
 <script>
 import image from "../assets/images/1-1.jpg";
+import { usePPTStore } from "../stores/ppt";
 export default {
   name: "Preface",
   props: {},
   data() {
     return {
       image,
+      store:usePPTStore(),
     };
   },
   methods: {},
+  mounted(){
+    this.store.nowPage.enterInto = Date.now();
+  }
 };
 </script>
 <template>
@@ -30,6 +35,10 @@ export default {
   .image {
     display: flex;
     flex-direction: row-reverse;
+    img{
+      height: 450px;
+      width: auto;
+    }
   }
 }
 </style>

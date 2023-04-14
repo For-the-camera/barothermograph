@@ -25,6 +25,12 @@ export default {
         next.state = "process";
         this.$set(this.renderList, index + 1, next);
         this.store.nowPage = this.renderList[index + 1];
+        const nowTime = Date.now();
+        this.store.nowPage.enterInto = nowTime;
+        if (this.store.nowPage.firstEnterInto) {
+          this.store.nowPage.firstEnterInto = false
+        }
+
       }
     },
     back() {
@@ -37,6 +43,8 @@ export default {
         later.state = "process";
         this.$set(this.renderList, index - 1, later);
         this.store.nowPage = this.renderList[index - 1];
+        const nowTime = Date.now();
+        this.store.nowPage.leave = nowTime;
       }
     },
     transformData: (configList) => {

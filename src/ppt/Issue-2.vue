@@ -27,7 +27,7 @@ export default {
           checked: false,
         },
         {
-          label: "液体具有蒸发作用",
+          label: "空气的热胀冷缩",
           value: "D",
           checked: false,
         },
@@ -53,19 +53,14 @@ export default {
 <template>
   <div class="page-container">
     <div class="question">
-      <p>
-        根据你所学的知识，请你判断该“简易温度计”的基本原理是
-        <span style="padding-right: 40px">（</span>
-        <span>{{ this.selectedOption }}</span>
-        <span style="padding-left: 40px">）</span>
-      </p>
+      <p>根据你所学的知识，请你判断该“简易温度计”的基本原理是</p>
       <ul>
         <el-radio-group v-model="selectedOption">
           <li
             v-for="(option, index) in options"
             :key="index"
             :ref="'ref-issue-2-' + option.value"
-            @click="selectOption(option.value)"
+            @click.prevent="selectOption(option.value)"
           >
             <el-radio :label="option.value">{{ "" }}</el-radio>
             {{ option.value }}.
@@ -75,7 +70,7 @@ export default {
       </ul>
     </div>
     <div>
-      <img :src="img1" alt="" />
+      <img :src="img1" style="height: 500px;width: auto;" alt="" />
     </div>
   </div>
 </template>

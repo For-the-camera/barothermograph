@@ -55,8 +55,8 @@ export default {
       <el-table border style="width: 100%" :data="tableData" :max-height="290">
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
         <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
-        <el-table-column prop="temp" label="温度"></el-table-column>
-        <el-table-column prop="spoutHeight" label="水柱高度"></el-table-column>
+        <el-table-column prop="temp" label="温度(℃)"></el-table-column>
+        <el-table-column prop="spoutHeight" label="水柱高度(cm)"></el-table-column>
         <el-table-column prop="action" label="操作">
           <template slot-scope="scope">
             <el-button
@@ -86,7 +86,7 @@ export default {
   }
 
   .data-table {
-    width: 530px;
+    width: 550px;
     ::v-deep .el-table .el-table__cell {
       padding: 0;
     }

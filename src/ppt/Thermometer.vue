@@ -26,21 +26,21 @@ export default {
         {
           imageName: bottle100,
           size: 100,
-          label: "100ml（小）",
+          label: "小",
           value: "小",
           checked: false,
         },
         {
           imageName: bottle200,
           size: 200,
-          label: "200ml（中）",
+          label: "中",
           value: "中",
           checked: false,
         },
         {
           imageName: bottle300,
           size: 300,
-          label: "300ml（大）",
+          label: "大",
           value: "大",
           checked: false,
         },
@@ -49,7 +49,7 @@ export default {
         {
           imageName: pipe3,
           size: 3,
-          label: "3ml（细）",
+          label: "细",
           value: "细",
           checked: false,
           width: 10,
@@ -57,7 +57,7 @@ export default {
         {
           imageName: pipe4,
           size: 4,
-          label: "4ml（中）",
+          label: "中",
           value: "中",
           checked: false,
           width: 13,
@@ -65,7 +65,7 @@ export default {
         {
           imageName: pipe5,
           size: 5,
-          label: "5ml（粗）",
+          label: "粗",
           value: "粗",
           checked: false,
           width: 19,
@@ -104,6 +104,10 @@ export default {
       // 临界值
       maxSpoutHeight: 0.0021156706755459664,
     };
+  },
+  mounted() {
+    this.checkedBottle(100, 0);
+    this.checkedPipe(3, 10, 0);
   },
   computed: {
     // 计算系数 C
@@ -213,7 +217,7 @@ export default {
         @click="checkedBottle(bottle.size, index)"
       >
         <div>
-          <img :src="bottle.imageName" alt="" />
+          <img :src="bottle.imageName" style="height: auto; width: 100px;" alt="" />
         </div>
         <p>{{ bottle.label }}</p>
         <div class="radio" :ref="`ref-bottle-${bottle.size}`"></div>
@@ -225,7 +229,7 @@ export default {
         @click="checkedPipe(pipe.size, pipe.width, index)"
       >
         <div>
-          <img :src="pipe.imageName" alt="" />
+          <img :src="pipe.imageName"  alt="" />
         </div>
         <p>{{ pipe.label }}</p>
         <div class="radio" :ref="`ref-pipe-${pipe.size}`"></div>
@@ -264,7 +268,7 @@ export default {
         </div>
       </div>
       <div class="ctrl">
-        <span style="background-color: yellow;">温度调节</span>
+        <span style="background-color: yellow">温度调节</span>
         <div class="marks">
           <div class="scale">
             <span v-for="i in [10, 15, 20, 25, 30]" :key="i">{{ i }}</span>
@@ -276,7 +280,10 @@ export default {
           </div>
         </div>
         <el-slider v-model="temp" :min="10" :max="30"></el-slider>
-        <el-button  type="success" @click="postRecord" :disabled="!store.nowPage.actionIndex"
+        <el-button
+          type="success"
+          @click="postRecord"
+          :disabled="!store.nowPage.actionIndex"
           >记录</el-button
         >
       </div>

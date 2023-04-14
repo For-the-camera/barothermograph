@@ -1,8 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/4-1.jpg";
-import img2 from "../assets/images/4-2.png";
-import img3 from "../assets/images/4-3.jpg";
 export default {
   name: "Issue3",
   props: {},
@@ -11,34 +9,27 @@ export default {
     return {
       store,
       img1,
-      img2,
-      img3,
       options: [
         {
-          label: "更换容积大一些的瓶子",
+          label: "选择容积大一些的瓶子",
           value: "A",
           checked: false,
         },
         {
-          label: "更换容积小一些的瓶子",
+          label: "选择容积小一些的瓶子",
           value: "B",
           checked: false,
         },
         {
-          label: "更换更粗的吸管",
+          label: "选择直径更大的吸管",
           value: "C",
           checked: false,
         },
         {
-          label: "更换更细的吸管",
+          label: "选择直径更小的吸管",
           value: "D",
           checked: false,
         },
-        {
-          label: "更换更硬的吸管",
-          value: "E",
-          checked: false,
-        }
       ],
       selectedOption: [],
     };
@@ -62,16 +53,13 @@ export default {
     <div class="question">
       <p>
         （多选）小红发现当外界的温度上升时，该“简易温度计”吸管内的液柱上升并不明显，为了解决该问题，你认为以下可行的改进方案是
-        <span style="padding-right: 30px">（</span>
-        <span v-for="answer in selectedOption" :key="answer" style="padding: 0 10px;">{{ answer }}</span>
-        <span style="padding-left: 30px">）</span>
       </p>
       <ul>
         <el-checkbox-group v-model="selectedOption">
           <li
             v-for="(option, index) in options"
             :key="index"
-            @click="selectOption(option.value)"
+            @click.prevent="selectOption(option.value)"
           >
             <el-checkbox :label="option.value">{{ "" }}</el-checkbox>
             {{ option.value }}.
@@ -82,8 +70,6 @@ export default {
     </div>
     <div class="images">
       <img :src="img1" alt="" />
-      <img :src="img2" class="arrow" alt="" />
-      <img :src="img3" alt="" />
     </div>
   </div>
 </template>
@@ -104,13 +90,16 @@ export default {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      
     }
   }
   .images {
     display: flex;
     align-items: center;
     height: 100%;
+    img{
+      height: 500px;
+      width: auto;
+    }
     .arrow {
       width: 100px;
       height: 100px;

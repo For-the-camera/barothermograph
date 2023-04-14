@@ -1,6 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
-import img1 from "../assets/images/2-1.jpg";
+import img1 from "../assets/images/2-1.png";
 import img2 from "../assets/images/2-2.jpg";
 import imgA from "../assets/images/2-A.jpg";
 import imgB from "../assets/images/2-B.jpg";
@@ -63,29 +63,29 @@ export default {
 <template>
   <div class="page-container">
     <div class="left">
-      <img :src="img1" class="question-stem" alt="" />
       <p>
-        上图是某一天各个时段气温的记录曲线，右图拍照的时间是上午8:00，请你判断以下哪张照片应该是下午16:00时拍摄的
-        <span style="padding-right: 40px;">（</span>
-        <span>{{ this.selectedOption }}</span>
-        <span style="padding-left: 40px;">）</span>
+        上图是某一天各个时段气温的记录曲线，右图拍照的时间是上午9:00，请你判断以下哪张照片应该是下午15:00时拍摄的
       </p>
       <div class="options" ref="optionsRef">
         <div
           class="item"
           v-for="option in options"
           :key="option.name"
-          @click="selectOption(option.name)"
+          @click.prevent="selectOption(option.name)"
         >
           <img :src="option.image" alt="" />
           <p :ref="'ref-issue-1-' + option.name">
-            {{ option.name }}
+            <el-radio-group v-model="selectedOption">
+              <el-radio :label="option.name">{{ option.name }}</el-radio>
+            </el-radio-group>
           </p>
         </div>
       </div>
     </div>
     <div class="right">
-      <img :src="img2" alt="" />
+      <img :src="img1" class="question-stem" alt="" />
+      <img :src="img2" style="height: 400px;width: auto;" alt="" />
+      <p>上午9:00</p>
     </div>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
       font-size: 1.25rem;
     }
     .question-stem {
-      width: 50%;
+      width: 40%;
       height: auto;
     }
     .options {
@@ -125,11 +125,21 @@ export default {
   .right {
     width: 30%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
     padding-left: 30px;
     img {
       width: 90%;
     }
+    p {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+  }
+  ::v-deep .el-radio__label{
+    font-size: 18px;
   }
 }
 </style>

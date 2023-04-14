@@ -8,7 +8,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
-      selectedOption:"",
+      selectedOption: "",
       tableData: [
         {
           bottleSize: "中",
@@ -90,36 +90,32 @@ export default {
     <div>
       <p>
         为探究
-        “吸管的粗细是否对液柱变化明显程度产生影响”，小红收集到一下实验数据。
+        “吸管的粗细是否对液柱变化明显程度产生影响”，小红收集到以下实验数据。
       </p>
-      <p>
-        根据实验数据，你认为以下结论正确的是
-        <span style="padding-right: 40px;">（</span>
-        <span>{{ selectedOption }}</span>
-        <span style="padding-left: 40px;">）</span>
-      </p>
+      <el-table border style="width: 100%" :data="tableData" :max-height="290">
+        <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
+        <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
+        <el-table-column prop="temp" label="温度(℃)"></el-table-column>
+        <el-table-column
+          prop="spoutHeight"
+          label="水柱高度(cm)"
+        ></el-table-column>
+      </el-table>
+      <p>根据实验数据，你认为以下结论正确的是</p>
       <ol>
         <el-radio-group v-model="selectedOption">
           <li
             v-for="option in options"
             :key="option.value"
-            @click="selectOption(option.value)"
+            @click.prevent="selectOption(option.value)"
           >
             <el-radio :label="option.value">{{ "" }}</el-radio>
             {{ option.value }}.
             {{ option.label }}
-            
           </li>
         </el-radio-group>
       </ol>
     </div>
-    <el-table border style="width: 100%" :data="tableData" :max-height="290">
-      <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
-      <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
-      <el-table-column prop="temp" label="温度"></el-table-column>
-      <el-table-column prop="spoutHeight" label="水柱高度"></el-table-column>
-      <el-table-column label="操作"> </el-table-column>
-    </el-table>
   </div>
 </template>
 <style scoped lang="scss">
@@ -137,14 +133,26 @@ export default {
       cursor: pointer;
       padding: 10px 0;
       font-size: 18px;
-      
     }
   }
-  ::v-deep .el-table tr {
-    height: 25px;
+  ::v-deep .el-table__header-wrapper table thead tr th {
+    background-color: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+    border-right: none;
+    padding: 10px 5px;
+    div {
+      text-align: center;
+      padding: 0;
+    }
   }
-  ::v-deep .el-table .el-table__cell {
+  ::v-deep .el-table__body-wrapper table tbody tr td {
     padding: 0;
+    height: 33px;
+    border-right: none;
+    div {
+      text-align: center;
+      padding: 0;
+    }
   }
 }
 </style>
