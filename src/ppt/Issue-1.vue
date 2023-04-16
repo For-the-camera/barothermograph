@@ -6,6 +6,7 @@ import imgA from "../assets/images/2-A.jpg";
 import imgB from "../assets/images/2-B.jpg";
 import imgC from "../assets/images/2-C.jpg";
 import imgD from "../assets/images/2-D.jpg";
+import { useProcessStore } from "../stores/process";
 export default {
   name: "Issue1",
   props: {},
@@ -13,6 +14,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       img1,
       img2,
       options: [
@@ -67,13 +69,24 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$watch(
+      () => this.store.answer.issue1,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page2.answer.firstResult = firstResult;
+        this.processStore.page2.answer.lastResult = lastResult;
+      },
+      { deep: true }
+    );
+  },
 };
 </script>
 <template>
   <div class="page-container">
     <div class="left">
       <p>
-        上图是某一天各个时段气温的记录曲线，右图拍照的时间是上午9:00，请你判断以下哪张照片应该是下午15:00时拍摄的
+        右图是某一天各个时段气温的记录曲线，右图拍照的时间是上午9:00，请你判断以下哪张照片应该是下午15:00时拍摄的
       </p>
       <div class="options" ref="optionsRef">
         <div
@@ -92,8 +105,8 @@ export default {
       </div>
     </div>
     <div class="right">
-      <img :src="img1" class="question-stem" alt="" />
-      <img :src="img2" style="height: 400px; width: auto" alt="" />
+      <img :src="img1" style="width: 400px" alt="" />
+      <img :src="img2" style="height: 350px; width: auto" alt="" />
       <p>上午9:00</p>
     </div>
   </div>
@@ -102,18 +115,15 @@ export default {
 .page-container {
   display: flex;
   .left {
-    width: 70%;
+    width: 60%;
     p {
       line-height: 3rem;
       font-size: 1.25rem;
     }
-    .question-stem {
-      width: 40%;
-      height: auto;
-    }
+
     .options {
       display: flex;
-      justify-content: space-between;
+      gap: 20px;
       padding-top: 20px;
       .item {
         cursor: pointer;
@@ -132,7 +142,7 @@ export default {
     }
   }
   .right {
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;

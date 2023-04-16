@@ -2,49 +2,118 @@ import { defineStore } from "pinia";
 
 export const useProcessStore = defineStore("process", {
   state: () => ({
-    page1:{
-      totalTime:0,
-      responseTime:0,
+    page1: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {}
     },
-    page2:{
-      totalTime:0,
-      responseTime:0,
+    // issue1
+    page2: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
+
     },
-    page3:{
-      totalTime:0,
-      responseTime:0,
+    // issue2
+    page3: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
+
     },
-    page4:{
-      totalTime:0,
-      responseTime:0,
+    // issue3
+    page4: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: [],
+        lastResult: [],
+        processAnswer: [],
+      }
     },
-    page5:{
-      totalTime:0,
-      responseTime:0,
+    // issue4
+    page5: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: [],
+        lastResult: [],
+        processAnswer: [],
+      }
     },
-    page6:{
-      totalTime:0,
-      responseTime:0,
+    // issue5
+    page6: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
     },
-    page7:{
-      totalTime:0,
-      responseTime:0,
+    // issueExtra1
+    page7: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
     },
-    page8:{
-      totalTime:0,
-      responseTime:0,
+    // issue6
+    page8: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: {
+          guessNo: "",
+          guess: "",
+        },
+        lastResult: {
+          guessNo: "",
+          guess: "",
+        },
+        processAnswer: [],
+      }
     },
-    page9:{
-      totalTime:0,
-      responseTime:0,
+    // issue7
+    page9: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: [],
+        lastResult: [],
+        processAnswer: [],
+      }
     },
-    page10:{
-      totalTime:0,
-      responseTime:0,
+    // issue8
+    page10: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
     },
-    page11:{
-      totalTime:0,
-      responseTime:0,
+    // issue9
+    page11: {
+      totalTime: 0,
+      responseTime: 0,
+      answer: {
+        firstResult: "",
+        lastResult: "",
+        processAnswer: [],
+      }
     },
   }),
 });

@@ -1,5 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 export default {
   name: "Issue4",
   props: {},
@@ -8,6 +9,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       tableData: [],
     };
   },
@@ -46,6 +48,21 @@ export default {
         this.store.putData.issue4 = false;
       }
     });
+    this.$watch(
+      () => this.store.answer.issue4,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page5.answer.firstResult = JSON.parse(
+          JSON.stringify(firstResult)
+        );
+        this.processStore.page5.answer.lastResult = JSON.parse(
+          JSON.stringify(lastResult)
+        );
+      },
+      {
+        deep: true,
+      }
+    );
   },
 };
 </script>
@@ -63,7 +80,7 @@ export default {
         </li>
         <li>
           <span>点击第二行的</span>
-          <div class="inline-radio"></div>
+          <div class="inline-radio" style="border-color: #ff174f"></div>
           <span>选择不同粗细的吸管</span>
         </li>
         <li>
@@ -83,7 +100,12 @@ export default {
       </ol>
     </div>
     <div class="data-table">
-      <el-table border style="width: 100%;height: 340px;" :data="tableData" :max-height="340">
+      <el-table
+        border
+        style="width: 100%; height: 340px"
+        :data="tableData"
+        :max-height="340"
+      >
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
         <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
         <el-table-column prop="temp" label="温度(℃)"></el-table-column>

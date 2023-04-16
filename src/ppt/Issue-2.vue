@@ -1,6 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/3-1.jpg";
+import { useProcessStore } from "../stores/process";
 
 export default {
   name: "Issue2",
@@ -9,6 +10,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       img1,
       options: [
         {
@@ -61,6 +63,17 @@ export default {
         }
       }
     },
+  },
+  mounted() {
+    this.$watch(
+      () => this.store.answer.issue2,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page3.answer.firstResult = firstResult;
+        this.processStore.page3.answer.lastResult = lastResult;
+      },
+      { deep: true }
+    );
   },
 };
 </script>

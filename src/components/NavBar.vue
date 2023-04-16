@@ -15,6 +15,19 @@ export default {
       renderList: this.transformData(this.config),
       store: usePPTStore(),
       processStore,
+      answerMap: {
+        1: null,
+        2: "issue1",
+        3: "issue2",
+        4: "issue3",
+        5: "issue4",
+        6: "issue5",
+        7: "issueExtra1",
+        8: "issue6",
+        9: "issue7",
+        10: "issue8",
+        11: "issue9",
+      },
     };
   },
   methods: {
@@ -34,6 +47,19 @@ export default {
         if (this.store.nowPage.firstEnterInto) {
           this.store.nowPage.firstEnterInto = false;
         }
+        // if (
+        //   index + 1 !== 1 &&
+        //   this.store.answer[this.answerMap[index + 1]].lastResult !== "" &&
+        //   this.store.nowPage.firstEvent !== 0
+        // ) {
+        //   const processResult = Object.assign(
+        //     {},
+        //     this.store.answer[this.answerMap[index + 1]].lastResult
+        //   );
+        //   this.store.answer[this.answerMap[index + 1]].processAnswer.push(
+        //     processResult
+        //   );
+        // }
         this.recordProcessData(this.store.nowPage);
         this.store.nowPage.firstEvent = 0;
         // ----------- 渲染下一页 ---------------
@@ -54,6 +80,19 @@ export default {
         this.$set(this.renderList, index - 1, later);
         const leaveTime = Date.now();
         this.store.nowPage.leave = leaveTime;
+        // if (
+        //   index + 1 !== 1 &&
+        //   this.store.answer[this.answerMap[index + 1]].lastResult !== "" &&
+        //   this.store.nowPage.firstEvent !== 0
+        // ) {
+        //   const processResult = Object.assign(
+        //     {},
+        //     this.store.answer[this.answerMap[index + 1]].lastResult
+        //   );
+        //   this.store.answer[this.answerMap[index + 1]].processAnswer.push(
+        //     processResult
+        //   );
+        // }
         this.recordProcessData(this.store.nowPage);
         this.store.nowPage.firstEvent = 0;
         // ----------- 渲染上一页 ---------------
@@ -76,6 +115,14 @@ export default {
     recordProcessData(page) {
       const { enterInto, leave, index, firstEvent } = page;
       const { totalTime, responseTime } = this.processStore[`page${index}`];
+      const answer = Object.assign(
+        {},
+        this.processStore[`page${index}`].answer
+      );
+      const { firstResult, lastResult, processAnswer } = answer;
+      if (index !== 1) {
+        processAnswer.push(lastResult);
+      }
       this.processStore[`page${index}`] = {
         totalTime:
           totalTime === 0 ? leave - enterInto : totalTime + leave - enterInto,
@@ -87,6 +134,14 @@ export default {
             : responseTime === 0
             ? leave - firstEvent
             : responseTime + leave - firstEvent,
+        answer:
+          index === 1
+            ? {}
+            : {
+                firstResult,
+                lastResult,
+                processAnswer,
+              },
       };
     },
   },

@@ -7,32 +7,32 @@ export default {
   data() {
     return {
       pptStore: usePPTStore(),
-      // processStore: useProcessStore(),
+      processStore: useProcessStore(),
       lastPageIndex: 0,
     };
   },
-  // mounted() {
-  //   this.$watch(
-  //     () => this.pptStore.nowPage,
-  //     (newPage, oldPage) => {
-  //       // const { enterInto, leave, index, firstEvent } = oldPage;
-  //       // const { totalTime, responseTime } = this.processStore[`page${index}`];
-  //       // this.processStore[`page${index}`] = {
-  //       //   totalTime:
-  //       //     totalTime === 0 ? leave - enterInto : totalTime + leave - enterInto,
-  //       //   responseTime:
-  //       //     firstEvent === 0
-  //       //       ? responseTime === 0
-  //       //         ? 0
-  //       //         : responseTime + leave - firstEvent
-  //       //       : responseTime === 0
-  //       //       ? leave - firstEvent
-  //       //       : responseTime + leave - firstEvent,
-  //       // };
-        
-  //     }
-  //   );
-  // },
+  mounted() {
+    window.addEventListener("message", (e) => {
+      console.log(e.data);
+    });
+    this.$watch(
+      () => this.processStore,
+      (val) => {
+        // console.log("触发");
+        parent.postMessage(
+          {
+            data: val.$state,
+            postTime: Date.now(),
+            cst: new Date(),
+            checkedAnswer: this.pptStore.checkedAnswer,
+
+          },
+          "*"
+        );
+      },
+      { deep: true }
+    );
+  },
 };
 </script>
 

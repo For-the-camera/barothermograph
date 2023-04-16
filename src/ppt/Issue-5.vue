@@ -1,5 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 
 export default {
   name: "Issue5",
@@ -8,6 +9,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore:useProcessStore(),
       selectedOption: "",
       tableData: [
         {
@@ -98,6 +100,17 @@ export default {
       }
     },
   },
+  mounted(){
+    this.$watch(
+      () =>  this.store.answer.issue5,
+      function(val){
+        const { firstResult, lastResult } = val;
+        this.processStore.page6.answer.firstResult = firstResult;
+        this.processStore.page6.answer.lastResult = lastResult;
+      },
+      {deep:true}
+    )
+  }
 };
 </script>
 <template>

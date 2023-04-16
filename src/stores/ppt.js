@@ -7,22 +7,31 @@ export const usePPTStore = defineStore("ppt", {
       issue1: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
       },
       issue2: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
+
       },
       issue3: {
         firstResult: [],
         lastResult: [],
+        processAnswer: [],
+
       },
       issue4: {
         firstResult: [],
         lastResult: [],
+        processAnswer: [],
+
       },
       issue5: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
+
       },
       issue6: {
         firstResult: {
@@ -33,22 +42,31 @@ export const usePPTStore = defineStore("ppt", {
           guessNo: "",
           guess: "",
         },
+        processAnswer: [],
+
       },
       issue7: {
         firstResult: [],
         lastResult: [],
+        processAnswer: [],
+
       },
       issue8: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
+
       },
       issue9: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
+
       },
       issueExtra1: {
         firstResult: "",
         lastResult: "",
+        processAnswer: [],
       },
     },
 
@@ -56,6 +74,7 @@ export const usePPTStore = defineStore("ppt", {
       issue4: false,
       issue7: false,
       issue8: false,
-    }
+    },
+    checkedAnswer: false
   }),
 });

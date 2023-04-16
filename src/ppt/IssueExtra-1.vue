@@ -1,11 +1,13 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 export default {
   name: "IssueExtra1",
   props: {},
   data() {
     return {
       store: usePPTStore(),
+      processStore: useProcessStore(),
       reason: "",
     };
   },
@@ -27,6 +29,17 @@ export default {
       }
     },
   },
+  mounted(){
+    this.$watch(
+      () =>  this.store.answer.issueExtra1,
+      function(val){
+        const { firstResult, lastResult } = val;
+        this.processStore.page7.answer.firstResult = firstResult;
+        this.processStore.page7.answer.lastResult = lastResult;
+      },
+      {deep:true}
+    )
+  }
 };
 </script>
 <template>

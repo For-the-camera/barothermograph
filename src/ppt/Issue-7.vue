@@ -1,5 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 
 export default {
   name: "Issue7",
@@ -8,6 +9,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       tableData: [],
     };
   },
@@ -47,6 +49,19 @@ export default {
         this.store.putData.issue7 = false;
       }
     });
+    this.$watch(
+      () => this.store.answer.issue7,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page9.answer.firstResult = JSON.parse(
+          JSON.stringify(firstResult)
+        );
+        this.processStore.page9.answer.lastResult = JSON.parse(
+          JSON.stringify(lastResult)
+        );
+      },
+      {deep: true}
+    );
   },
 };
 </script>
@@ -57,7 +72,12 @@ export default {
       <p>请通过实验模拟器收集数据验证你的猜想，并将数据记录在以下表格</p>
     </div>
     <div class="data-table">
-      <el-table border style="width: 100%;height: 340px;" :data="tableData" :max-height="340">
+      <el-table
+        border
+        style="width: 100%; height: 340px"
+        :data="tableData"
+        :max-height="340"
+      >
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
         <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
         <el-table-column prop="temp" label="温度(℃)"></el-table-column>

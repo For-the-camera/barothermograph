@@ -108,6 +108,19 @@ export default {
   mounted() {
     this.checkedBottle(100, 0);
     this.checkedPipe(3, 10, 0);
+    this.$watch(
+      () => this.store.nowPage,
+      () => {
+        if (this.currentBottle !== 100) {
+          this.checkedBottle(100, 0);
+        }
+        if (this.currentPipe !== 3) {
+          this.checkedPipe(3, 10, 0);
+        }
+        this.temp = 10;
+      },
+      { deep: true }
+    );
   },
   computed: {
     // 计算系数 C
@@ -244,7 +257,11 @@ export default {
           <img :src="pipe.imageName" alt="" />
         </div>
         <p>{{ pipe.label }}</p>
-        <div class="radio" :ref="`ref-pipe-${pipe.size}`"></div>
+        <div
+          class="radio"
+          style="border-color: #ff174f"
+          :ref="`ref-pipe-${pipe.size}`"
+        ></div>
       </div>
     </div>
     <div class="preview">

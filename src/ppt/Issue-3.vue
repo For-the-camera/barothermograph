@@ -1,6 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/4-1.jpg";
+import { useProcessStore } from "../stores/process";
 export default {
   name: "Issue3",
   props: {},
@@ -8,6 +9,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       img1,
       options: [
         {
@@ -50,12 +52,34 @@ export default {
         this.store.nowPage.firstEnterInto ||
         this.store.answer.issue3.firstResult.length === 0
       ) {
-        this.store.answer.issue3.firstResult = this.selectedOption;
-        this.store.answer.issue3.lastResult = this.selectedOption;
+        console.log("active");
+        this.store.answer.issue3.firstResult = JSON.parse(
+          JSON.stringify(this.selectedOption)
+        );
+        this.store.answer.issue3.lastResult = JSON.parse(
+          JSON.stringify(this.selectedOption)
+        );
       } else {
-        this.store.answer.issue3.lastResult = this.selectedOption;
+        this.store.answer.issue3.lastResult = JSON.parse(
+          JSON.stringify(this.selectedOption)
+        );
       }
     },
+  },
+  mounted() {
+    this.$watch(
+      () => this.store.answer.issue3,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page4.answer.firstResult = JSON.parse(
+          JSON.stringify(firstResult)
+        );
+        this.processStore.page4.answer.lastResult = JSON.parse(
+          JSON.stringify(lastResult)
+        );
+      },
+      { deep: true }
+    );
   },
 };
 </script>

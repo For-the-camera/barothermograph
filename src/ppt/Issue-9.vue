@@ -2,6 +2,7 @@
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/10-2.jpg";
 import img2 from "../assets/images/10-3.jpg";
+import { useProcessStore } from "../stores/process";
 
 export default {
   name: "Test1",
@@ -10,6 +11,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       img1,
       img2,
       options: [
@@ -41,6 +43,17 @@ export default {
         this.store.answer.issue9.lastResult = option;
       }
     },
+  },
+  mounted() {
+    this.$watch(
+      () => this.store.answer.issue9,
+      function (val) {
+        const { firstResult, lastResult } = val;
+        this.processStore.page11.answer.firstResult = firstResult;
+        this.processStore.page11.answer.lastResult = lastResult;
+      },
+      { deep: true }
+    );
   },
 };
 </script>
