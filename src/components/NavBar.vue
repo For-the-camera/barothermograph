@@ -32,6 +32,25 @@ export default {
   },
   methods: {
     go() {
+      if (this.store.nowPage.index === 11) {
+        this.$confirm(
+          "即将提交 ‘全部答案’，提交后将无法更改，请确认无误后点击 ’提交全部答案‘",
+          "提示",
+          {
+            confirmButtonText: "提交全部答案",
+            cancelButtonText: "取消",
+          }
+        ).then(() => {
+          if (this.store.nowPage.firstEnterInto) {
+            this.store.nowPage.firstEnterInto = false;
+          }
+          this.store.nowPage.leave = Date.now();
+          this.recordProcessData(this.store.nowPage);
+          this.store.nowPage.firstEvent = 0;
+          this.store.checkedAnswer = true;
+        });
+        return;
+      }
       if (this.store.nowPage.index !== this.renderList.length) {
         const index = this.store.nowPage.index - 1;
         const now = this.renderList[index];

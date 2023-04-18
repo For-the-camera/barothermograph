@@ -12,13 +12,13 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("message", (e) => {
-      console.log(e.data);
-    });
+    // window.addEventListener("message", (e) => {
+    //   console.log(e.data);
+    // });
     this.$watch(
       () => this.processStore,
       (val) => {
-        // console.log("触发");
+        console.log("post");
         parent.postMessage(
           {
             data: val.$state,
