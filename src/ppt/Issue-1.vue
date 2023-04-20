@@ -86,7 +86,7 @@ export default {
   <div class="page-container">
     <div class="left">
       <p>
-        右图是某一天各个时段气温的记录曲线，右图拍照的时间是上午9:00，请你判断以下哪张照片应该是下午15:00时拍摄的
+        图1-1是小明所在城市某天各时段的气温记录曲线，上午9:00时“简易温度计”液柱情况如图1-2所示，请判断下午15:00时液柱情况是：
       </p>
       <div class="options" ref="optionsRef">
         <div
@@ -106,8 +106,9 @@ export default {
     </div>
     <div class="right">
       <img :src="img1" style="width: 400px" alt="" />
+      <p>图 1-1</p>
       <img :src="img2" style="height: 350px; width: auto" alt="" />
-      <p>上午9:00</p>
+      <p>图 1-2 （上午9:00）</p>
     </div>
   </div>
 </template>
@@ -147,7 +148,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    
     padding-left: 30px;
     img {
       width: 90%;

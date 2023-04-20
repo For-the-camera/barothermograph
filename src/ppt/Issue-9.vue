@@ -60,6 +60,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="question-stem">
+      <p>小明用两个相同的瓶子分别做了甲乙两支“简易温度计”，记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。</p>
       <div class="images">
         <div class="images-inner">
           <img :src="img1" alt="" />
@@ -71,7 +72,7 @@ export default {
         </div>
       </div>
       <p style="margin: 20px 0">
-        小明使用大小相同的两个瓶子分别做了以上甲乙两支简易温度计，记录同一天不同时段甲乙两支温度计管内液柱高度的变化情况，得到变化曲线A和变化曲线B，请你判断乙温度计对应的曲线是
+        请你判断乙温度计对应的曲线是
       </p>
     </div>
     <ol>

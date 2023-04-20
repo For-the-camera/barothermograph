@@ -13,12 +13,12 @@ export default {
       options: [
         {
           label: "猜想1",
-          value: "瓶子越大，升温相同时液柱变化得越明显",
+          value: "瓶子容积越大，升温相同时液柱变化越明显",
           answer: "A",
         },
         {
           label: "猜想2",
-          value: "瓶子越小，升温相同时液柱变化得越明显",
+          value: "瓶子容积越小，升温相同时液柱变化越明显",
           answer: "B",
         },
         {
@@ -68,19 +68,11 @@ export default {
   <div class="page-container">
     <div class="question-stem">
       <p>
-        针对 “瓶子的大小是否对液柱变化明显程度产生影响”
-        ，小刚、小红和小明分别提出以下猜想
+        探究 “瓶子容积对液柱变化的影响” ，小明的三位同学分别提出以下猜想，请你选择你认为正确的猜想。
       </p>
     </div>
 
-    <div class="questiton-stem">
-      <p v-for="(option, index) in options" :key="index">
-        {{ option.label + "：" + option.value }}
-      </p>
-    </div>
-    <div class="question-stem">
-      <p>你认为以上哪一个猜想是正确的</p>
-    </div>
+    
     <ul>
       <el-radio-group v-model="currentSelect">
         <li
@@ -89,7 +81,7 @@ export default {
           @click="selectOption(item)"
         >
           <el-radio :label="item.answer">{{ "" }}</el-radio>
-          {{ item.answer }}. {{ item.value }}
+          {{ item.label }}: {{ item.value }}
         </li>
       </el-radio-group>
     </ul>

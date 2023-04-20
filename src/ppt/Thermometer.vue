@@ -259,7 +259,7 @@ export default {
         <p>{{ pipe.label }}</p>
         <div
           class="radio"
-          style="border-color: #ff174f"
+          style="border-color: #ff174f; border-radius:0"
           :ref="`ref-pipe-${pipe.size}`"
         ></div>
       </div>
@@ -287,7 +287,7 @@ export default {
               :style="{ bottom: spoutHeightToPx - 10 + 'px' }"
             >
               <div class="pointer-line"></div>
-              <div class="pointer-value">{{ spoutHeight }}</div>
+              <div class="pointer-value">{{ spoutHeight }}cm</div>
             </div>
             <div
               class="spout"
@@ -297,7 +297,7 @@ export default {
         </div>
       </div>
       <div class="ctrl">
-        <span style="background-color: yellow">温度调节</span>
+        <span style="background-color: yellow">温度℃</span>
         <div class="marks">
           <div class="scale">
             <span v-for="i in [10, 15, 20, 25, 30]" :key="i">{{ i }}</span>
@@ -400,6 +400,7 @@ $radio-border-color: #1890ff;
             }
             .pointer-value {
               color: red;
+              font-size: 16px;
             }
           }
           .spout {

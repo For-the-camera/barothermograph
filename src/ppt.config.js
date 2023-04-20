@@ -70,7 +70,7 @@ export default [
     leave:0,
     firstEvent:0,
     firstEnterInto:true,
-    left: import("../src/ppt/Thermometer.vue"),
+    left: import("../src/ppt/Chart-2.vue"),
     right: import("../src/ppt/IssueExtra-1.vue"),
   },
   {

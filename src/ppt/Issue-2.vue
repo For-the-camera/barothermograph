@@ -80,7 +80,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="question">
-      <p>根据你所学的知识，请你判断该“简易温度计”的基本原理是</p>
+      <p>根据你所学的科学知识，该“简易温度计” 的基本原理是</p>
       <ul>
         <el-radio-group v-model="selectedOption">
           <li

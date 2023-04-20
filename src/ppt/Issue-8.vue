@@ -15,7 +15,10 @@ export default {
     };
   },
   mounted() {
+    console.log(2112);
+    console.log(this.store.answer.issue7);
     this.store.answer.issue7.lastResult.forEach((item, index) => {
+      console.log(item);
       this.$set(this.tableData, index, item);
     });
     this.$watch(
@@ -35,6 +38,15 @@ export default {
       },
       { immediate: true }
     );
+    this.$watch(
+      () =>  this.store.answer.issue8,
+      function(val){
+        const { firstResult, lastResult } = val;
+        this.processStore.page10.answer.firstResult = firstResult;
+        this.processStore.page10.answer.lastResult = lastResult;
+      },
+      {deep:true}
+    )
   },
   methods: {
     startResponse() {
@@ -54,22 +66,11 @@ export default {
       }
     },
   },
-  mounted(){
-    this.$watch(
-      () =>  this.store.answer.issue8,
-      function(val){
-        const { firstResult, lastResult } = val;
-        this.processStore.page10.answer.firstResult = firstResult;
-        this.processStore.page10.answer.lastResult = lastResult;
-      },
-      {deep:true}
-    )
-  }
 };
 </script>
 <template>
   <div class="page-container">
-    <p>根据你收集到的实验数据，你能得到什么样的结论，请填写在以下空白处</p>
+    <p>根据你收集到的实验数据，你能得到什么结论，请填写在以下空白处</p>
     <el-input
       type="textarea"
       :rows="6"

@@ -1,6 +1,7 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/4-1.jpg";
+import img2 from "../assets/images/4-2.jpg";
 import { useProcessStore } from "../stores/process";
 export default {
   name: "Issue3",
@@ -11,6 +12,7 @@ export default {
       store,
       processStore: useProcessStore(),
       img1,
+      img2,
       options: [
         {
           label: "选择容积大一些的瓶子",
@@ -87,7 +89,7 @@ export default {
   <div class="page-container">
     <div class="question">
       <p>
-        （多选）小红发现当外界的温度上升时，该“简易温度计”吸管内的液柱上升并不明显，为了解决该问题，你认为以下可行的改进方案是
+        （可多选）小明发现当外界的温度上升时（如右图所示），“简易温度计”吸管内的液柱变化并不明显，为了解决该问题，以下可行的改进方案是
       </p>
       <ul>
         <el-checkbox-group v-model="selectedOption">
@@ -104,7 +106,15 @@ export default {
       </ul>
     </div>
     <div class="images">
-      <img :src="img1" alt="" />
+      <div>
+        <img :src="img1" alt="" />
+        <p>上午 8:00 (21℃)</p>
+      </div>
+
+      <div>
+        <img :src="img2" alt="" />
+        <p>中午 12:00 (26℃)</p>
+      </div>
     </div>
   </div>
 </template>
@@ -132,8 +142,12 @@ export default {
     align-items: center;
     height: 100%;
     img {
-      height: 500px;
+      height: 400px;
       width: auto;
+      margin: 0 30px;
+    }
+    p{
+      margin: 0 30px;
     }
     .arrow {
       width: 100px;
