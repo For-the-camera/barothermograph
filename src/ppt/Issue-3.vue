@@ -148,6 +148,7 @@ export default {
     }
     p{
       margin: 0 30px;
+      text-align: center;
     }
     .arrow {
       width: 100px;

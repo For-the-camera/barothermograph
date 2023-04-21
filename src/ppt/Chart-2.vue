@@ -13,7 +13,7 @@ export default {
 </script>
 <template>
   <div class="page-container">
-    <img :src="img" style="height: 300px; width: auto;" alt="">
+    <img :src="img" style="height: 370px; width: auto;" alt="">
   </div>
 </template>
 <style scoped lang="scss">

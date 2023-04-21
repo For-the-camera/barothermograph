@@ -77,12 +77,12 @@ export default {
       </p>
       <ol>
         <li>
-          <span>点击第一行的</span>
+          <span>点击</span>
           <div class="inline-radio"></div>
           <span> 选择不同大小的瓶子 </span>
         </li>
         <li>
-          <span>点击第二行的</span>
+          <span>点击</span>
           <div class="inline-radio" style="border-color: #ff174f;border-radius: 0;"></div>
           <span>选择不同粗细的吸管</span>
         </li>
@@ -91,7 +91,7 @@ export default {
           <div class="inline-triangle">
             <div class="inline-triangle-inner"></div>
           </div>
-          <span>观察液柱变化，模拟器自动显示管内液面高度；</span>
+          <span>观察液柱及其示数的变化，示数显示的是液柱高度（液面到瓶口的距离）；</span>
         </li>
         <li>
           <span style="padding-right: 5px">点击</span>

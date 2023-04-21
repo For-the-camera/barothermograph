@@ -2,6 +2,7 @@
 import { usePPTStore } from "../stores/ppt";
 import img1 from "../assets/images/10-2.jpg";
 import img2 from "../assets/images/10-3.jpg";
+import img from "../assets/images/10-4.jpg";
 import { useProcessStore } from "../stores/process";
 
 export default {
@@ -14,6 +15,7 @@ export default {
       processStore: useProcessStore(),
       img1,
       img2,
+      img,
       options: [
         {
           lable: "曲线A",
@@ -60,20 +62,23 @@ export default {
 <template>
   <div class="page-container">
     <div class="question-stem">
-      <p>小明用两个相同的瓶子分别做了甲乙两支“简易温度计”，记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。</p>
+      <p>
+        小明用两个相同的瓶子分别做了甲乙两支“简易温度计”，记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。
+      </p>
       <div class="images">
         <div class="images-inner">
-          <img :src="img1" alt="" />
-          <p>甲</p>
+          <img :src="img" alt="" />
+          <p>
+            <span>甲</span>
+            <span>乙</span>
+          </p>
         </div>
-        <div class="images-inner">
+        <!-- <div class="images-inner">
           <img :src="img2" alt="" />
           <p>乙</p>
-        </div>
+        </div> -->
       </div>
-      <p style="margin: 20px 0">
-        请你判断乙温度计对应的曲线是
-      </p>
+      <p style="margin: 20px 0">请你判断乙温度计对应的曲线是</p>
     </div>
     <ol>
       <el-radio-group v-model="selectedOption">
@@ -110,6 +115,9 @@ export default {
           font-size: 28px;
           font-weight: bold;
           text-align: center;
+          span{
+            padding: 0 40px;
+          }
         }
       }
     }

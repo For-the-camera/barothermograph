@@ -23,7 +23,7 @@ export default {
         },
         {
           label: "猜想3",
-          value: "瓶子的大小对液柱变化明显程度不会产生影响",
+          value: "瓶子的大小对液柱变化不会产生影响",
           answer: "C",
         },
       ],

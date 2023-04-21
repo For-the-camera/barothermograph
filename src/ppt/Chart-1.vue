@@ -1,5 +1,5 @@
 <script>
-import img from "../assets/images/1-1.jpg"
+import img from "../assets/images/c-1.jpg"
 export default {
   name: "Chart1",
   props: {},

@@ -284,7 +284,7 @@ export default {
           <div class="spout-mask" :style="{ width: currentPipeWidth + 'px' }">
             <div
               class="pointer"
-              :style="{ bottom: spoutHeightToPx - 10 + 'px' }"
+              :style="{ bottom: spoutHeightToPx - 12 + 'px' }"
             >
               <div class="pointer-line"></div>
               <div class="pointer-value">{{ spoutHeight }}cm</div>
@@ -392,7 +392,7 @@ $radio-border-color: #1890ff;
             display: flex;
             align-items: center;
             position: absolute;
-            bottom: -10px;
+            bottom: -11px;
             .pointer-line {
               width: 60px;
               height: 1px;
@@ -400,7 +400,7 @@ $radio-border-color: #1890ff;
             }
             .pointer-value {
               color: red;
-              font-size: 16px;
+              font-size: 20px;
             }
           }
           .spout {
