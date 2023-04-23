@@ -109,7 +109,7 @@ export default {
   p {
     font-size: 1.25rem;
     margin-bottom: 50px;
-    line-height: 3rem;
+    line-height: 1.5;
   }
   ul {
     list-style: none;
@@ -117,7 +117,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 18px;
+      font-size: 1.25rem;
     }
   }
 }

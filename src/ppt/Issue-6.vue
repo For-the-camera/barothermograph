@@ -101,7 +101,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 2;
+    line-height: 1.5;
+    font-size: 1.25rem;
   }
   ul {
     list-style: none;
@@ -109,7 +110,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
   }
   .question-stem {

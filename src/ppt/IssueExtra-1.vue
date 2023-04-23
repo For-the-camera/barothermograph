@@ -64,7 +64,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 2;
+    line-height: 1.5;
+    font-size: 1.25rem;
     margin: 16px 0;
   }
   .input-area {

@@ -15,10 +15,7 @@ export default {
     };
   },
   mounted() {
-    console.log(2112);
-    console.log(this.store.answer.issue7);
     this.store.answer.issue7.lastResult.forEach((item, index) => {
-      console.log(item);
       this.$set(this.tableData, index, item);
     });
     this.$watch(
@@ -95,7 +92,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 2;
+    line-height: 1.5;
+    font-size: 1.25rem;
     margin: 20px 0;
   }
   ::v-deep .el-table tr {

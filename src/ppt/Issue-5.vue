@@ -150,7 +150,9 @@ export default {
   padding: 10px;
   p {
     margin: 16px 0;
-    line-height: 2;
+    line-height: 1.5;
+    font-size: 1.25rem;
+
   }
   ol {
     list-style-position: inside;
@@ -158,8 +160,9 @@ export default {
     margin: 40px 0;
     li {
       cursor: pointer;
-      padding: 10px 0;
-      font-size: 18px;
+      padding: 5px 0;
+      line-height: 1.5;
+      font-size: 1.25rem;
     }
   }
   ::v-deep .el-table__header-wrapper table thead tr th {

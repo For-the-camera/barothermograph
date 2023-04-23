@@ -89,6 +89,7 @@ export default {
             this.$refs.navBarRef.back();
           }
         "
+        v-show="this.store.nowPage.index !== 12"
         >上一页</el-button
       >
       <el-button
@@ -98,6 +99,7 @@ export default {
             this.$refs.navBarRef.go();
           }
         "
+        v-show="this.store.nowPage.index !== 12"
         >下一页</el-button
       >
     </div>
@@ -110,7 +112,7 @@ $ppt-bg-left: #55e6c1;
 $ppt-bg-right: #f6e58d;
 $ppt-border-radius: 30px;
 $single-padding: 30px;
-$ppt-border-basic: .1rem solid #353b48;
+$ppt-border-basic: 0.1rem solid #353b48;
 .container {
   height: 100%;
   display: flex;
@@ -123,21 +125,23 @@ $ppt-border-basic: .1rem solid #353b48;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
-    .left,.right,.single{
+    .left,
+    .right,
+    .single {
       border: $ppt-border-basic;
     }
-    
+
     .left {
       border-radius: $ppt-border-radius;
       background-color: $ppt-bg-left;
       padding: $ppt-padding;
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
     .right {
       border-radius: $ppt-border-radius;
       background-color: $ppt-bg-right;
       padding: $ppt-padding;
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
     .single {
       background-color: $ppt-bg-right;
@@ -149,7 +153,8 @@ $ppt-border-basic: .1rem solid #353b48;
   .ctrl {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 9px;
+    height: 40px;
   }
 }
 </style>

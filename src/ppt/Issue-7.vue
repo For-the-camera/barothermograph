@@ -107,6 +107,8 @@ export default {
     margin-bottom: 30px;
     p {
       margin: 20px 0;
+      font-size: 1.25rem;
+      line-height: 1.5;
     }
   }
   ::v-deep .el-table tr {

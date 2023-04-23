@@ -48,6 +48,14 @@ export default {
           this.recordProcessData(this.store.nowPage);
           this.store.nowPage.firstEvent = 0;
           this.store.checkedAnswer = true;
+          const index = this.store.nowPage.index - 1;
+          const now = this.renderList[index];
+          now.state = "finish";
+          this.$set(this.renderList, index, now);
+          const next = this.renderList[index + 1];
+          next.state = "process";
+          this.$set(this.renderList, index + 1, next);
+          this.store.nowPage = this.renderList[index + 1];
         });
         return;
       }
@@ -228,37 +236,37 @@ $wait-color: #bbb7ad;
         font-size: 14px;
       }
       .step-index {
-        width: 23px;
-        height: 23px;
+        width: 22px;
+        height: 22px;
         background-color: $theme-color;
         color: white;
         border-radius: 50%;
-        margin-right: 9px;
+        margin-right: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
       }
       .step-icon-finsih {
-        width: 23px;
-        height: 23px;
+        width: 22px;
+        height: 22px;
         background-color: none;
         color: $theme-color;
         border: 1px solid $theme-color;
         border-color: $theme-color;
         border-radius: 50%;
-        margin-right: 9px;
+        margin-right: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
       }
       .step-index-wait {
-        width: 23px;
-        height: 23px;
+        width: 22px;
+        height: 22px;
         background-color: none;
         color: $wait-color;
         border: 1px solid $wait-color;
         border-radius: 50%;
-        margin-right: 9px;
+        margin-right: 5px;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -118,7 +118,7 @@ export default {
   .left {
     width: 60%;
     p {
-      line-height: 3rem;
+      line-height: 1.5;
       font-size: 1.25rem;
     }
 

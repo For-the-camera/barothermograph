@@ -117,5 +117,11 @@ export default [
     firstEnterInto:true,
     left: import("../src/ppt/Chart.vue"),
     right: import("../src/ppt/Issue-9.vue"),
+  },
+  {
+    index: 12,
+    title: "完成",
+    left: import("../src/ppt/Chart-3.vue"),
+    right: import("../src/ppt/End.vue")
   }
 ];

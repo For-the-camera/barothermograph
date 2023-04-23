@@ -124,8 +124,8 @@ export default {
   justify-content: space-between;
 
   p {
-    font-size: 20px;
-    line-height: 2;
+    font-size: 1.25rem;
+    line-height: 1.5;
     margin-bottom: 50px;
   }
   ul {
@@ -134,7 +134,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 18px;
+      font-size: 1.25rem;
     }
   }
   .images {

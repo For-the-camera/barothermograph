@@ -143,7 +143,12 @@ export default {
   ol {
     list-style-position: inside;
     li {
-      padding: 10px 0;
+      padding: 5px 0;
+      font-size: 1.25rem;
+    
+      span{
+        font-size: 1.25rem;
+      }
       .inline-radio {
         background-color: white;
         display: inline-block;
@@ -176,7 +181,8 @@ export default {
     }
   }
   p {
-    line-height: 2;
+    line-height: 1.5;
+    font-size: 1.25rem;
   }
   ::v-deep .el-table tr {
     height: 25px;

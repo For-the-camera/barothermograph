@@ -62,7 +62,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="question-stem">
-      <p>
+      <p style="font-size: 1.25rem; line-height: 1.5">
         小明用两个相同的瓶子分别做了甲乙两支“简易温度计”，记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。
       </p>
       <div class="images">
@@ -78,7 +78,9 @@ export default {
           <p>乙</p>
         </div> -->
       </div>
-      <p style="margin: 20px 0">请你判断乙温度计对应的曲线是</p>
+      <p style="margin: 10px 0; font-size: 1.25rem; line-height: 1.5">
+        请你判断乙温度计对应的曲线是
+      </p>
     </div>
     <ol>
       <el-radio-group v-model="selectedOption">
@@ -115,7 +117,7 @@ export default {
           font-size: 28px;
           font-weight: bold;
           text-align: center;
-          span{
+          span {
             padding: 0 40px;
           }
         }
@@ -131,7 +133,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 18px;
+      font-size: 1.25rem;
     }
   }
 }
