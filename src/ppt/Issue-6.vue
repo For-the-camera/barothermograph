@@ -13,12 +13,12 @@ export default {
       options: [
         {
           label: "猜想1",
-          value: "瓶子容积越大，升温相同时液柱变化越明显",
+          value: "升高相同的温度，瓶子容积越大液柱变化越明显",
           answer: "A",
         },
         {
           label: "猜想2",
-          value: "瓶子容积越小，升温相同时液柱变化越明显",
+          value: "升高相同的温度，瓶子容积越小液柱变化越明显",
           answer: "B",
         },
         {

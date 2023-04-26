@@ -12,8 +12,8 @@ export const useProcessStore = defineStore("process", {
       totalTime: 0,
       responseTime: 0,
       answer: {
-        firstResult: "",
-        lastResult: "",
+        firstResult:[],
+        lastResult: [],
         processAnswer: [],
       }
 

@@ -70,7 +70,7 @@ export default {
   <div class="page-container">
     <div>
       <p>
-        【注】本页属于尝试操作页面，不需作答
+        【注】本页属于尝试操作页面，不需要作答
       </p>
       <p>
         左图是一个实验模拟器，如果你想了解如何使用该实验模拟器，请尝试以下操作：
@@ -79,7 +79,7 @@ export default {
         <li>
           <span>点击</span>
           <div class="inline-radio"></div>
-          <span> 选择不同大小的瓶子 </span>
+          <span>选择不同大小的瓶子 </span>
         </li>
         <li>
           <span>点击</span>
@@ -87,7 +87,7 @@ export default {
           <span>选择不同粗细的吸管</span>
         </li>
         <li>
-          <span>调节温度按钮</span>
+          <span>拖动温度按钮</span>
           <div class="inline-triangle">
             <div class="inline-triangle-inner"></div>
           </div>
@@ -100,15 +100,16 @@ export default {
           >
           <span style="padding-left: 5px">按钮，可将数据记录在以下表格中</span>
         </li>
+        <li>点击删除按钮，可以删除此行数据</li>
       </ol>
       <p>尝试操作完成请点击 “下一页”</p>
     </div>
     <div class="data-table">
       <el-table
         border
-        style="width: 100%; height: 290px"
+        style="width: 100%; height: 120px"
         :data="tableData"
-        :max-height="290"
+        :max-height="120"
       >
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
         <el-table-column prop="pipeSize" label="管子粗细"></el-table-column>

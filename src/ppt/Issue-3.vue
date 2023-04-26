@@ -54,7 +54,6 @@ export default {
         this.store.nowPage.firstEnterInto ||
         this.store.answer.issue3.firstResult.length === 0
       ) {
-        console.log("active");
         this.store.answer.issue3.firstResult = JSON.parse(
           JSON.stringify(this.selectedOption)
         );

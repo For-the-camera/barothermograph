@@ -166,6 +166,9 @@ export default {
   },
   methods: {
     checkedBottle: function (size, index) {
+      if (this.store.nowPage.index === 5 && index === 2) {
+        return;
+      }
       if (this.currentBottle === size && this.currentBottle) {
         this.$refs[
           `ref-bottle-${this.currentBottle}`
@@ -184,6 +187,9 @@ export default {
       }
     },
     checkedPipe: function (size, width, index) {
+      if (this.store.nowPage.index === 5 && index === 1) {
+        return;
+      }
       if (this.currentPipe === size && this.currentPipe) {
         this.$refs[`ref-pipe-${this.currentPipe}`][0].style.backgroundColor =
           "#fff";
@@ -206,6 +212,12 @@ export default {
         this.store.nowPage.firstEvent = Date.now();
       }
       const postSite = this.store.nowPage.actionIndex;
+      if (
+        postSite === "issue4" &&
+        this.store.answer.issue4.lastResult.length === 2
+      ) {
+        return;
+      }
       if (this.currentBottleIndex !== null && this.currentPipeIndex !== null) {
         const data = {
           bottleSize: this.bottles[this.currentBottleIndex].value,
@@ -236,6 +248,12 @@ export default {
         v-for="(bottle, index) in bottles"
         :key="bottle.size"
         @click="checkedBottle(bottle.size, index)"
+        :style="{
+          cursor:
+            store.nowPage.index === 5 && index === 2
+              ? 'not-allowed'
+              : 'pointer',
+        }"
       >
         <div>
           <img
@@ -252,6 +270,12 @@ export default {
         v-for="(pipe, index) in pipes"
         :key="pipe.size"
         @click="checkedPipe(pipe.size, pipe.width, index)"
+        :style="{
+          cursor:
+            store.nowPage.index === 5 && index === 1
+              ? 'not-allowed'
+              : 'pointer',
+        }"
       >
         <div>
           <img :src="pipe.imageName" alt="" />
@@ -259,7 +283,7 @@ export default {
         <p>{{ pipe.label }}</p>
         <div
           class="radio"
-          style="border-color: #ff174f; border-radius:0"
+          style="border-color: #ff174f; border-radius: 0"
           :ref="`ref-pipe-${pipe.size}`"
         ></div>
       </div>
