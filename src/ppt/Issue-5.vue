@@ -51,22 +51,22 @@ export default {
       ],
       options: [
         {
-          label: "当瓶子一定，吸管越粗，升温相同时液柱变化越明显",
+          label: "当瓶子一定，升高相同温度，吸管越粗液柱高度变化越明显",
           value: "A",
           checked: false,
         },
         {
-          label: "当瓶子一定，吸管越细，升温相同时液柱变化越明显",
+          label: "当瓶子一定，升高相同温度，吸管越细液柱高度变化越明显",
           value: "B",
           checked: false,
         },
         {
-          label: "吸管越细，升温相同时液柱变化越明显",
+          label: "升高相同温度，吸管越粗液柱高度变化越明显",
           value: "C",
           checked: false,
         },
         {
-          label: "液柱变化与吸管粗细无关",
+          label: "液柱高度变化与吸管粗细无关",
           value: "D",
           checked: false,
         },
@@ -117,7 +117,7 @@ export default {
   <div class="page-container">
     <div>
       <p>
-        为探究 “吸管粗细对液柱变化的影响”，小明通过实验模拟器收集到以下实验数据。
+        为探究 “吸管粗细对液柱高度变化的影响”，小明通过实验模拟器收集到以下实验数据。
       </p>
       <el-table border style="width: 100%" :data="tableData" :max-height="290">
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
@@ -157,7 +157,7 @@ export default {
   ol {
     list-style-position: inside;
     list-style-type: none;
-    margin: 40px 0;
+    margin: 20px 0;
     li {
       cursor: pointer;
       padding: 5px 0;

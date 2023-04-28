@@ -63,7 +63,7 @@ export default {
   <div class="page-container">
     <div class="question-stem">
       <p style="font-size: 1.25rem; line-height: 1.5">
-        小明用两个相同的瓶子分别做了甲乙两支“简易温度计”，记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。
+        小明用两个相同的瓶子分别做了甲乙两支“简易温度计”（甲的吸管粗一些），记录某天同一地点不同时段甲乙两支温度计管内液柱高度的变化情况，得到曲线A和B。
       </p>
       <div class="images">
         <div class="images-inner">
@@ -78,7 +78,7 @@ export default {
           <p>乙</p>
         </div> -->
       </div>
-      <p style="margin: 10px 0; font-size: 1.25rem; line-height: 1.5">
+      <p style="margin: 5px 0; font-size: 1.25rem; line-height: 1.5">
         请你判断乙温度计对应的曲线是
       </p>
     </div>
@@ -110,11 +110,11 @@ export default {
         display: flex;
         flex-direction: column;
         img {
-          height: 350px;
+          height: 400px;
           width: auto;
         }
         p {
-          font-size: 28px;
+          font-size: 24px;
           font-weight: bold;
           text-align: center;
           span {
@@ -132,7 +132,7 @@ export default {
     list-style-type: none;
     li {
       cursor: pointer;
-      padding: 10px 0;
+      padding: 5px 0;
       font-size: 1.25rem;
     }
   }

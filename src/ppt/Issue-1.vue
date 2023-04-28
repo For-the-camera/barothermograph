@@ -86,7 +86,7 @@ export default {
   <div class="page-container">
     <div class="left">
       <p>
-        图1-1是小明所在城市某天各时段的气温记录曲线，上午9:00时“简易温度计”液柱情况如图1-2所示，请判断下午15:00时液柱情况是：
+        图1-1是小明所在城市某天各时段的气温记录曲线，上午9:00时“简易温度计”液柱高度如图1-2所示，请判断下午15:00时液柱高度是：
       </p>
       <div class="options" ref="optionsRef">
         <div

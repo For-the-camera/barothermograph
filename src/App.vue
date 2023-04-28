@@ -15,17 +15,19 @@ export default {
     // window.addEventListener("message", (e) => {
     //   console.log(e.data);
     // });
+
     this.$watch(
       () => this.processStore,
       (val) => {
         console.log("post");
+        const urlParams = new URLSearchParams(window.location.search);
+        const taskAnswer = urlParams.get("taskAnswer");
         parent.postMessage(
           {
             data: val.$state,
             postTime: Date.now(),
             cst: new Date(),
             isAnswered: this.pptStore.checkedAnswer,
-
           },
           "*"
         );

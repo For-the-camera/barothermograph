@@ -7,11 +7,11 @@ export default {
   data() {
     return {
       image,
-      store:usePPTStore(),
+      store: usePPTStore(),
     };
   },
   methods: {},
-  mounted(){
+  mounted() {
     this.store.nowPage.enterInto = Date.now();
   },
 };
@@ -19,7 +19,8 @@ export default {
 <template>
   <div class="container">
     <p>
-      小明根据科普书籍上制作“简易温度计”的活动，利用一些简易材料（玻璃瓶、吸管、红墨水等），制作了一支如右图所示的温度计：在玻璃瓶里装满水并用红墨水染红，然后给玻璃瓶盖上盖子，从瓶盖中央插入一根吸管并保持瓶口的密封性，吸管上均匀地标上刻度，吸管内液柱的变化即可显示外界温度变化。
+      前言：小明参照科普书籍
+      “制作简易温度计”的活动方案，利用玻璃瓶、吸管、红墨水等简易材料，制作了一支如右图所示的温度计：在玻璃瓶里装满水并用红墨水染色，然后给玻璃瓶盖上盖子，从瓶盖中央插入一根吸管并保持瓶口处的密封性，吸管上均匀地标上刻度，吸管内液柱高度的变化即可显示外界气温变化。
     </p>
     <div class="image">
       <img :src="image" />
@@ -35,7 +36,7 @@ export default {
   .image {
     display: flex;
     flex-direction: row-reverse;
-    img{
+    img {
       height: 450px;
       width: auto;
     }

@@ -91,7 +91,7 @@ export default {
           <div class="inline-triangle">
             <div class="inline-triangle-inner"></div>
           </div>
-          <span>观察液柱及其示数的变化，示数显示的是液柱高度（液面到瓶口的距离）；</span>
+          <span>观察液柱高度及其示数的变化，示数显示的是液柱高度（液面到瓶口的距离）；</span>
         </li>
         <li>
           <span style="padding-right: 5px">点击</span>

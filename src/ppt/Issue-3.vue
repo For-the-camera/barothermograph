@@ -88,7 +88,7 @@ export default {
   <div class="page-container">
     <div class="question">
       <p>
-        （可多选）小明发现当外界的温度上升时（如右图所示），“简易温度计”吸管内的液柱变化并不明显，为了解决该问题，以下可行的改进方案是
+        （可多选）小明发现当外界的温度上升时（如右图所示），“简易温度计”吸管内的液柱高度变化并不明显，为了解决该问题，以下改进方案中可行的是
       </p>
       <ul>
         <el-checkbox-group v-model="selectedOption">

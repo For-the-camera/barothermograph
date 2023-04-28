@@ -14,22 +14,22 @@ export default {
       img1,
       options: [
         {
-          label: "瓶子的热胀冷缩",
+          label: "瓶子热胀冷缩",
           value: "A",
           checked: false,
         },
         {
-          label: "液体的热胀冷缩",
+          label: "液体热胀冷缩",
           value: "B",
           checked: false,
         },
         {
-          label: "吸管的热胀冷缩",
+          label: "吸管热胀冷缩",
           value: "C",
           checked: false,
         },
         {
-          label: "空气的热胀冷缩",
+          label: "空气热胀冷缩",
           value: "D",
           checked: false,
         },
@@ -80,7 +80,7 @@ export default {
 <template>
   <div class="page-container">
     <div class="question">
-      <p>根据你所学的科学知识，该“简易温度计” 的基本原理是</p>
+      <p>根据你所学的科学知识，解释“简易温度计” 的基本原理是</p>
       <ul>
         <el-radio-group v-model="selectedOption">
           <li
