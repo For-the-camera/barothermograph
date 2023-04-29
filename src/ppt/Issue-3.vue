@@ -52,35 +52,40 @@ export default {
       this.selectedOption.sort();
       if (
         this.store.nowPage.firstEnterInto ||
-        this.store.answer.issue3.firstResult.length === 0
+        this.processStore.page4.firstResult.length === 0
       ) {
-        this.store.answer.issue3.firstResult = JSON.parse(
+        this.processStore.page4.firstResult = JSON.parse(
           JSON.stringify(this.selectedOption)
         );
-        this.store.answer.issue3.lastResult = JSON.parse(
+        this.processStore.page4.lastResult = JSON.parse(
           JSON.stringify(this.selectedOption)
         );
       } else {
-        this.store.answer.issue3.lastResult = JSON.parse(
+        this.processStore.page4.lastResult = JSON.parse(
           JSON.stringify(this.selectedOption)
         );
       }
+      this.$postMessage()
     },
   },
   mounted() {
-    this.$watch(
-      () => this.store.answer.issue3,
-      function (val) {
-        const { firstResult, lastResult } = val;
-        this.processStore.page4.answer.firstResult = JSON.parse(
-          JSON.stringify(firstResult)
-        );
-        this.processStore.page4.answer.lastResult = JSON.parse(
-          JSON.stringify(lastResult)
-        );
-      },
-      { deep: true }
-    );
+    if (this.store.recallData) {
+      this.selectedOption = this.store.answer.issue3.lastResult;
+    }
+    // this.$watch(
+    //   () => this.store.answer.issue3,
+    //   function (val) {
+    //     const { firstResult, lastResult } = val;
+    //     this.processStore.page4.answer.firstResult = JSON.parse(
+    //       JSON.stringify(firstResult)
+    //     );
+    //     this.processStore.page4.answer.lastResult = JSON.parse(
+    //       JSON.stringify(lastResult)
+    //     );
+    //     this.$postMessage();
+    //   },
+    //   { deep: true }
+    // );
   },
 };
 </script>
@@ -88,7 +93,7 @@ export default {
   <div class="page-container">
     <div class="question">
       <p>
-        （可多选）小明发现当外界的温度上升时（如右图所示），“简易温度计”吸管内的液柱高度变化并不明显，为了解决该问题，以下改进方案中可行的是
+        (可多选)小明发现当外界的温度上升时(如右图所示)，“简易温度计”吸管内的液柱高度变化并不明显，为了解决该问题，以下改进方案中可行的是
       </p>
       <ul>
         <el-checkbox-group v-model="selectedOption">
@@ -123,8 +128,8 @@ export default {
   justify-content: space-between;
 
   p {
-    font-size: 1.25rem;
-    line-height: 1.5;
+    font-size: 22px;
+    line-height: 2em;
     margin-bottom: 50px;
   }
   ul {
@@ -133,7 +138,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 1.25rem;
+      font-size: 22px;
     }
   }
   .images {

@@ -39,40 +39,52 @@ export default {
       this.currentSelect = option.answer;
       if (
         this.store.nowPage.firstEnterInto ||
-        this.store.answer.issue6.firstResult.guessNo === ""
+        this.processStore.page8.answer.firstResult.guessNo === ""
       ) {
-        this.store.answer.issue6.firstResult.guessNo = option.answer;
-        this.store.answer.issue6.firstResult.guess = option.value;
-        this.store.answer.issue6.lastResult.guessNo = option.answer;
-        this.store.answer.issue6.lastResult.guess = option.value;
+        this.processStore.page8.answer.firstResult.guessNo = option.answer;
+        this.processStore.page8.answer.firstResult.guess = option.value;
+        this.processStore.page8.answer.lastResult.guessNo = option.answer;
+        this.processStore.page8.answer.lastResult.guess = option.value;
       } else {
-        this.store.answer.issue6.lastResult.guessNo = option.answer;
-        this.store.answer.issue6.lastResult.guess = option.value;
+        this.processStore.page8.answer.lastResult.guessNo = option.answer;
+        this.processStore.page8.answer.lastResult.guess = option.value;
       }
+      this.$postMessage();
     },
   },
-  mounted(){
-    this.$watch(
-      () =>  this.store.answer.issue6,
-      function(val){
-        const { firstResult, lastResult } = val;
-        this.processStore.page8.answer.firstResult = Object.assign({},firstResult);
-        this.processStore.page8.answer.lastResult = Object.assign({},lastResult);
-      },
-      {deep:true}
-    )
-  }
+  mounted() {
+    if (this.store.recallData) {
+      const { guessNo, guess } = this.store.answer.issue6.lastResult;
+      this.currentSelect = guessNo;
+    }
+    // this.$watch(
+    //   () => this.processStore.page8.answer,
+    //   function (val) {
+    //     const { firstResult, lastResult } = val;
+    //     this.processStore.page8.answer.answer.firstResult = Object.assign(
+    //       {},
+    //       firstResult
+    //     );
+    //     this.processStore.page8.answer.answer.lastResult = Object.assign(
+    //       {},
+    //       lastResult
+    //     );
+    //     this.$postMessage();
+    //   },
+    //   { deep: true }
+    // );
+  },
 };
 </script>
 <template>
   <div class="page-container">
     <div class="question-stem">
       <p>
-        探究 “瓶子容积对液柱高度变化的影响” ，小明的三位同学分别提出以下猜想，请你选择其中最合理的猜想。
+        探究 “瓶子容积对液柱高度变化的影响”
+        ，小明的三位同学分别提出以下猜想，请你选择其中最合理的猜想。
       </p>
     </div>
 
-    
     <ul>
       <el-radio-group v-model="currentSelect">
         <li
@@ -91,7 +103,7 @@ export default {
       <el-input
         type="textarea"
         v-model="reason"
-        @blur="store.answer.issue6.reason = reason"
+        @blur="processStore.page8.answer.reason = reason"
         :rows="5"
       ></el-input>
     </div> -->
@@ -101,8 +113,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 1.5;
-    font-size: 1.25rem;
+    line-height: 2em;
+    font-size: 22px;
   }
   ul {
     list-style: none;
@@ -110,7 +122,8 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 1.25rem;
+      font-size: 22px;
+      line-height: 2em;
     }
   }
   .question-stem {

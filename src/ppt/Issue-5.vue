@@ -81,35 +81,40 @@ export default {
       if (this.selectedOption === index && this.selectedOption) {
         this.selectedOption = null;
         if (this.store.nowPage.firstEnterInto) {
-          this.store.answer.issue5.firstResult = "";
-          this.store.answer.issue5.lastResult = "";
+          this.processStore.page6.answer.firstResult = "";
+          this.processStore.page6.answer.lastResult = "";
         } else {
-          this.store.answer.issue5.lastResult = "";
+          this.processStore.page6.answer.lastResult = "";
         }
       } else {
         this.selectedOption = index;
         if (
           this.store.nowPage.firstEnterInto ||
-          this.store.answer.issue5.firstResult === ""
+          this.processStore.page6.answer.firstResult === ""
         ) {
-          this.store.answer.issue5.firstResult = index;
-          this.store.answer.issue5.lastResult = index;
+          this.processStore.page6.answer.firstResult = index;
+          this.processStore.page6.answer.lastResult = index;
         } else {
-          this.store.answer.issue5.lastResult = index;
+          this.processStore.page6.answer.lastResult = index;
         }
       }
+      this.$postMessage();
     },
   },
   mounted(){
-    this.$watch(
-      () =>  this.store.answer.issue5,
-      function(val){
-        const { firstResult, lastResult } = val;
-        this.processStore.page6.answer.firstResult = firstResult;
-        this.processStore.page6.answer.lastResult = lastResult;
-      },
-      {deep:true}
-    )
+    if (this.store.recallData) {
+      this.selectedOption = this.store.answer.issue5.lastResult;
+    }
+    // this.$watch(
+    //   () =>  this.processStore.page6.answer,
+    //   function(val){
+    //     const { firstResult, lastResult } = val;
+    //     this.processStore.page6.answer.answer.firstResult = firstResult;
+    //     this.processStore.page6.answer.answer.lastResult = lastResult;
+    //     this.$postMessage();
+    //   },
+    //   {deep:true}
+    // )
   }
 };
 </script>
@@ -121,7 +126,7 @@ export default {
       </p>
       <el-table border style="width: 100%" :data="tableData" :max-height="290">
         <el-table-column prop="bottleSize" label="瓶子大小"></el-table-column>
-        <el-table-column prop="pipeSize" label="吸管大小"></el-table-column>
+        <el-table-column prop="pipeSize" label="吸管粗细"></el-table-column>
         <el-table-column prop="temp" label="温度(℃)"></el-table-column>
         <el-table-column
           prop="spoutHeight"
@@ -149,9 +154,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    margin: 16px 0;
-    line-height: 1.5;
-    font-size: 1.25rem;
+    line-height: 2em;
+    font-size: 19px;
 
   }
   ol {
@@ -161,8 +165,8 @@ export default {
     li {
       cursor: pointer;
       padding: 5px 0;
-      line-height: 1.5;
-      font-size: 1.25rem;
+      line-height: 2em;
+      font-size: 19px;
     }
   }
   ::v-deep .el-table__header-wrapper table thead tr th {

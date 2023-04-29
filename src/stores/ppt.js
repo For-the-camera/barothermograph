@@ -75,6 +75,7 @@ export const usePPTStore = defineStore("ppt", {
       issue7: false,
       issue8: false,
     },
-    checkedAnswer: false
+    checkedAnswer: false,
+    recallData:false,
   }),
 });

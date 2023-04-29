@@ -47,12 +47,17 @@ export default {
     },
   },
   mounted() {
+    if (this.store.recallData) {
+      this.selectedOption = this.store.answer.issue9.lastResult;
+    }
     this.$watch(
       () => this.store.answer.issue9,
       function (val) {
         const { firstResult, lastResult } = val;
         this.processStore.page11.answer.firstResult = firstResult;
         this.processStore.page11.answer.lastResult = lastResult;
+        this.$postMessage();
+
       },
       { deep: true }
     );
@@ -106,19 +111,20 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-around;
+      margin-top: 15px;
       .images-inner {
         display: flex;
         flex-direction: column;
         img {
-          height: 400px;
+          height: 370px;
           width: auto;
         }
         p {
-          font-size: 24px;
+          font-size: 22px;
           font-weight: bold;
           text-align: center;
           span {
-            padding: 0 40px;
+            padding: 0 50px;
           }
         }
       }

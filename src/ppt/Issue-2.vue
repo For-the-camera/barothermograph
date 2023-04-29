@@ -65,12 +65,16 @@ export default {
     },
   },
   mounted() {
+    if (this.store.recallData) {
+      this.selectedOption = this.store.answer.issue2.lastResult;
+    }
     this.$watch(
       () => this.store.answer.issue2,
       function (val) {
         const { firstResult, lastResult } = val;
         this.processStore.page3.answer.firstResult = firstResult;
         this.processStore.page3.answer.lastResult = lastResult;
+        this.$postMessage();
       },
       { deep: true }
     );
@@ -107,9 +111,9 @@ export default {
   justify-content: space-between;
 
   p {
-    font-size: 1.25rem;
+    font-size: 22px;
     margin-bottom: 50px;
-    line-height: 1.5;
+    line-height: 2em;
   }
   ul {
     list-style: none;
@@ -117,7 +121,7 @@ export default {
     li {
       cursor: pointer;
       padding: 10px 0;
-      font-size: 1.25rem;
+      font-size: 22px;
     }
   }
 }

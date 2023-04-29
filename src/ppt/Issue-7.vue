@@ -16,16 +16,16 @@ export default {
   methods: {
     deleteRowData(index) {
       if (this.store.nowPage.firstEvent) {
-        this.store.answer.issue7.firstResult.splice(index, 1);
-        this.store.answer.issue7.lastResult.splice(index, 1);
+        this.processStore.page9.answer.firstResult.splice(index, 1);
+        this.processStore.page9.answer.lastResult.splice(index, 1);
       } else {
-        this.store.answer.issue7.lastResult.splice(index, 1);
+        this.processStore.page9.answer.lastResult.splice(index, 1);
       }
-      this.store.answer.issue7.lastResult.forEach((item, i) => {
+      this.processStore.page9.answer.lastResult.forEach((item, i) => {
         this.$set(this.tableData, i, item);
       });
       this.tableData.forEach((item, i) => {
-        if (i + 1 > this.store.answer.issue7.lastResult.length) {
+        if (i + 1 > this.processStore.page9.answer.lastResult.length) {
           this.$set(this.tableData, i, {});
           if (i > 7) {
             this.tableData.splice(i, 1);
@@ -33,42 +33,43 @@ export default {
         }
       });
       this.store.putData.issue8 = true;
+      this.$postMessage();
     },
   },
   mounted() {
-    if (this.store.answer.issue7.lastResult.length > 0) {
-      this.store.answer.issue7.lastResult.forEach((item, index) => {
-        this.$set(this.tableData, index, item);
-      });
-    }
+    this.processStore.page9.answer.lastResult.forEach((item, index) => {
+      this.$set(this.tableData, index, item);
+    });
+
     this.$watch("store.putData.issue7", function (val) {
       if (val) {
-        this.store.answer.issue7.lastResult.forEach((item, index) => {
+        this.processStore.page9.answer.lastResult.forEach((item, index) => {
           this.$set(this.tableData, index, item);
         });
         this.store.putData.issue7 = false;
       }
     });
-    this.$watch(
-      () => this.store.answer.issue7,
-      function (val) {
-        const { firstResult, lastResult } = val;
-        this.processStore.page9.answer.firstResult = JSON.parse(
-          JSON.stringify(firstResult)
-        );
-        this.processStore.page9.answer.lastResult = JSON.parse(
-          JSON.stringify(lastResult)
-        );
-      },
-      {deep: true}
-    );
+    // this.$watch(
+    //   () => this.processStore.page9.answer,
+    //   function (val) {
+    //     const { firstResult, lastResult } = val;
+    //     this.processStore.page9.answer.firstResult = JSON.parse(
+    //       JSON.stringify(firstResult)
+    //     );
+    //     this.processStore.page9.answer.lastResult = JSON.parse(
+    //       JSON.stringify(lastResult)
+    //     );
+    //     this.$postMessage();
+    //   },
+    //   {deep: true}
+    // );
   },
 };
 </script>
 <template>
   <div class="page-container">
     <div class="question-stem">
-      <p>你的猜想是：{{ store.answer.issue6.lastResult.guess }}</p>
+      <p>你的猜想是：{{ processStore.page8.answer.lastResult.guess }}</p>
       <p>请通过实验模拟器收集数据验证你的猜想，并将数据记录在以下表格</p>
     </div>
     <div class="data-table">
@@ -107,8 +108,8 @@ export default {
     margin-bottom: 30px;
     p {
       margin: 20px 0;
-      font-size: 1.25rem;
-      line-height: 1.5;
+      font-size: 22px;
+      line-height: 2em;
     }
   }
   ::v-deep .el-table tr {

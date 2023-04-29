@@ -30,12 +30,17 @@ export default {
     },
   },
   mounted(){
+    if (this.store.recallData) {
+      this.reason = this.store.answer.issueExtra1.lastResult;
+    }
     this.$watch(
       () =>  this.store.answer.issueExtra1,
       function(val){
         const { firstResult, lastResult } = val;
         this.processStore.page7.answer.firstResult = firstResult;
         this.processStore.page7.answer.lastResult = lastResult;
+        this.$postMessage();
+
       },
       {deep:true}
     )
@@ -64,8 +69,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 1.5;
-    font-size: 1.25rem;
+    line-height: 2em;
+    font-size: 22px;
     margin: 16px 0;
   }
   .input-area {

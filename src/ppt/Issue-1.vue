@@ -70,12 +70,16 @@ export default {
     },
   },
   mounted() {
+    if (this.store.recallData) {
+      this.selectedOption = this.store.answer.issue1.lastResult;
+    }
     this.$watch(
       () => this.store.answer.issue1,
       function (val) {
         const { firstResult, lastResult } = val;
         this.processStore.page2.answer.firstResult = firstResult;
         this.processStore.page2.answer.lastResult = lastResult;
+        this.$postMessage();
       },
       { deep: true }
     );
@@ -118,8 +122,8 @@ export default {
   .left {
     width: 60%;
     p {
-      line-height: 1.5;
-      font-size: 1.25rem;
+      line-height: 2em;
+      font-size: 22px;
     }
 
     .options {
@@ -148,14 +152,14 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     padding-left: 30px;
     img {
       width: 90%;
     }
     p {
       margin: 5px 0;
-      font-size: 18px;
+      font-size: 20px;
     }
   }
   ::v-deep .el-radio__label {

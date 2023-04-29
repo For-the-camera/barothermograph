@@ -1,5 +1,6 @@
 <script>
 import { usePPTStore } from "../stores/ppt";
+import { useProcessStore } from "../stores/process";
 import bottle100 from "../assets/images/bottle-100.png";
 import bottle200 from "../assets/images/bottle-200.png";
 import bottle300 from "../assets/images/bottle-300.png";
@@ -22,6 +23,7 @@ export default {
     const store = usePPTStore();
     return {
       store,
+      processStore: useProcessStore(),
       bottles: [
         {
           imageName: bottle100,
@@ -213,8 +215,8 @@ export default {
       }
       const postSite = this.store.nowPage.actionIndex;
       if (
-        postSite === "issue4" &&
-        this.store.answer.issue4.lastResult.length === 2
+        postSite === "page5" &&
+        this.processStore.page5.answer.lastResult.length === 2
       ) {
         return;
       }
@@ -226,16 +228,19 @@ export default {
           spoutHeight: this.spoutHeight,
         };
         if (this.store.nowPage.firstEnterInto) {
-          this.store.answer[postSite].firstResult.push(data);
-          this.store.answer[postSite].lastResult.push(data);
+          this.processStore[postSite].answer.firstResult.push(data);
+          this.processStore[postSite].answer.lastResult.push(data);
         } else {
-          this.store.answer[postSite].lastResult.push(data);
+          this.processStore[postSite].answer.lastResult.push(data);
         }
-        this.store.putData[`${postSite}`] = true;
-        if (postSite === "issue7") {
+        if (postSite === "page9") {
+          this.store.putData.issue7 = true;
           this.store.putData["issue8"] = true;
+        } else if (postSite === "page5") {
+          this.store.putData.issue4 = true;
         }
       }
+      this.$postMessage();
     },
   },
 };

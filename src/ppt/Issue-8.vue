@@ -15,16 +15,19 @@ export default {
     };
   },
   mounted() {
-    this.store.answer.issue7.lastResult.forEach((item, index) => {
+    this.processStore.page9.answer.lastResult.forEach((item, index) => {
       this.$set(this.tableData, index, item);
     });
+    if (this.store.recallData) {
+      this.conclusion = this.store.answer.issue8.lastResult;
+    }
     this.$watch(
       "store.putData.issue8",
       function (val) {
         if (val) {
-          const length = this.store.answer.issue7.lastResult.length;
+          const length = this.processStore.page9.answer.lastResult.length;
 
-          this.store.answer.issue7.lastResult.forEach((item, index) => {
+          this.processStore.page9.answer.lastResult.forEach((item, index) => {
             this.$set(this.tableData, index, item);
           });
           if (length < this.tableData.length) {
@@ -41,6 +44,8 @@ export default {
         const { firstResult, lastResult } = val;
         this.processStore.page10.answer.firstResult = firstResult;
         this.processStore.page10.answer.lastResult = lastResult;
+        this.$postMessage();
+
       },
       {deep:true}
     )
@@ -92,8 +97,8 @@ export default {
 .page-container {
   padding: 10px;
   p {
-    line-height: 1.5;
-    font-size: 1.25rem;
+    line-height: 2em;
+    font-size: 22px;
     margin: 20px 0;
   }
   ::v-deep .el-table tr {

@@ -56,6 +56,7 @@ export default {
           next.state = "process";
           this.$set(this.renderList, index + 1, next);
           this.store.nowPage = this.renderList[index + 1];
+          this.$postMessage();
         });
         return;
       }
@@ -170,6 +171,7 @@ export default {
                 processAnswer,
               },
       };
+      this.$postMessage();
     },
   },
   mounted() {
