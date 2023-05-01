@@ -46,12 +46,12 @@ export default {
     // window.addEventListener("message", (e) => {
     //   console.log(e.data);
     // });
-    this.recallData();
+    try {
+      this.recallData();
+    } catch (error) {}
     this.$watch(
       () => this.processStore,
-      (val) => {
-        
-      },
+      (val) => {},
       { deep: true }
     );
   },
